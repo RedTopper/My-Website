@@ -1,0 +1,45 @@
+{
+  "name": "awalter.net",
+  "version": "0.0.0",
+  "description": "My Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedTopper/awalter.net.git"
+  },
+  "keywords": [
+    "Personal",
+    "Site"
+  ],
+  "author": "Aaron Walter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RedTopper/awalter.net/issues"
+  },
+  "homepage": "https://github.com/RedTopper/awalter.net#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "laravel-mix": "^6.0.16",
+    "node-sass": "^5.0.0",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^3.1.2",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "ts-loader": "^8.1.0",
+    "typescript": "^4.2.4",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12"
+  }
+}

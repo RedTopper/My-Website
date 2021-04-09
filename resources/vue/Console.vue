@@ -3,7 +3,7 @@
 		<div v-for="line in lines" :key="line"  v-html="line">
 			{{ line }}
 		</div>
-		<div class="cursor" v-bind:class="{off: off}">_</div><br>
+		<div class="cursor" v-bind:class="{off: off}">_</div>
 	</div>
 </template>
 
@@ -21,6 +21,13 @@ export default {
 		setInterval(function() {
 			self.off = !self.off;
 		}.bind(this), 250);
+	},
+	updated: function () {
+		let self: any = this;
+		self.$nextTick(function () {
+			let objDiv = document.getElementById("app");
+			if (objDiv) objDiv.scrollTop = objDiv.scrollHeight;
+		})
 	}
 }
 </script>
@@ -29,10 +36,10 @@ export default {
 .console
 	color: white
 
-.off
-	display: none
-
 .console.color
-	color: lightgray
+	color: #a7a7a7
+
+.off
+	opacity: 0
 
 </style>

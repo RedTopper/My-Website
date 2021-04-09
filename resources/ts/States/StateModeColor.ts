@@ -1,19 +1,19 @@
-import Console from "../../vue/Blank.vue";
+import Console from "../../vue/Console.vue";
 import {State} from "./State";
-import {ConData} from "../ConData";
+import {ConData, Format} from "../ConData";
 
 export class StateModeColor extends State {
-	enable: boolean;
+	grey: boolean;
 	con: ConData;
 
-	constructor(time: number, con: ConData, enable: boolean) {
+	constructor(time: number, con: ConData, grey: boolean) {
 		super(Console, time);
 		this.con = con;
-		this.enable = enable;
+		this.grey = grey;
 	}
 
 	data() {
-		this.con.color = this.enable;
+		this.con.grey = this.grey;
 		return this.con;
 	}
 }

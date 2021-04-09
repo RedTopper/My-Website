@@ -1,6 +1,6 @@
 <template>
-	<div class="console" v-bind:class="{color: color}">
-		<div v-for="line in lines" :key="line"  v-html="line">
+	<div class="console" v-bind:class="{grey: grey}">
+		<div v-for="(line, index) in lines" :key="index"  v-html="line">
 			{{ line }}
 		</div>
 		<div class="cursor" v-bind:class="{off: off}">_</div>
@@ -10,7 +10,7 @@
 <script lang="ts">
 export default {
 	name: "Console",
-	props: ["lines", "color"],
+	props: ["lines", "grey"],
 	data() {
 		return {
 			off: false
@@ -18,14 +18,16 @@ export default {
 	},
 	created() {
 		let self: any = this;
+		// Blink cursor
 		setInterval(function() {
 			self.off = !self.off;
 		}.bind(this), 250);
 	},
-	updated: function () {
+	updated() {
 		let self: any = this;
+		// Auto scroll down
 		self.$nextTick(function () {
-			let objDiv = document.getElementById("app");
+			let objDiv = document.getElementById("screen");
 			if (objDiv) objDiv.scrollTop = objDiv.scrollHeight;
 		})
 	}
@@ -36,7 +38,7 @@ export default {
 .console
 	color: white
 
-.console.color
+.console.grey
 	color: #a7a7a7
 
 .off

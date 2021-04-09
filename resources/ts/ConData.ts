@@ -1,7 +1,7 @@
 export class ConData {
 	timeStart: number = 0;
 	lines: string[] = [];
-	color: boolean = false;
+	grey: boolean = false;
 
 	addLine(format: Format, line?: string) {
 		// Return early if the line is empty

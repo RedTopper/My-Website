@@ -1,16 +1,16 @@
 <template>
-	<div>
-		<div v-for="line in lines" :key="line">
+	<div class="console" v-bind:class="{color: color}">
+		<div v-for="line in lines" :key="line"  v-html="line">
 			{{ line }}
 		</div>
-		<div class="cursor" v-bind:class="{off: off}">_</div>
+		<div class="cursor" v-bind:class="{off: off}">_</div><br>
 	</div>
 </template>
 
 <script lang="ts">
 export default {
 	name: "Console",
-	props: ["lines"],
+	props: ["lines", "color"],
 	data() {
 		return {
 			off: false
@@ -26,10 +26,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-div
+.console
 	color: white
 
 .off
 	display: none
+
+.console.color
+	color: lightgray
 
 </style>

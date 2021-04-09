@@ -29,16 +29,16 @@ export default {
 	height: 100%
 
 .splash
-	padding-top: 90px
+	padding-top: 120px
 	margin: 0 auto
 	display: block
 
 .progress
 	display: flex
 	flex-direction: row
-	padding-top: 180px
+	padding-top: 220px
 	width: 100%
-	max-width: 400px
+	max-width: 500px
 	margin: auto
 
 .text
@@ -57,7 +57,7 @@ export default {
 	background-color: white
 
 .help
-	font-size: 8px
+	font-size: 10px
 	padding-top: 8px
 	text-align: center
 

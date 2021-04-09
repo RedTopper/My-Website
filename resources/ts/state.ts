@@ -1,4 +1,14 @@
 import {Component} from 'vue';
+import Boot from '../vue/Boot.vue';
+import Console from '../vue/Console.vue';
+import Blank from '../vue/Blank.vue';
+import Splash from '../vue/Splash.vue';
+
+export class ConData {
+	timeStart: number = 0;
+	lines: string[] = [];
+	color: boolean = false;
+}
 
 export abstract class State {
 	time: number;
@@ -16,8 +26,8 @@ export class StateProgress extends State {
 	percent: number;
 	code: string;
 
-	constructor(comp: Component, time: number, percent: number, code: string) {
-		super(comp, time);
+	constructor(time: number, percent: number, code: string) {
+		super(Boot, time);
 		this.percent = percent;
 		this.code = code;
 	}
@@ -31,15 +41,67 @@ export class StateProgress extends State {
 }
 
 export class StateConsole extends State {
-	constructor(comp: Component, time: number) {
-		super(comp, time);
+	con: ConData;
+	text?: string;
+	color?: boolean;
+
+	constructor(time: number, con: ConData, text?: string, color?: boolean) {
+		super(Console, time);
+		this.con = con;
+		this.text = text;
+		this.color = color;
 	}
 
 	data() {
+		// stop if text is udefined
+		if (!this.text) {
+			return {lines: []}
+		}
+
+		// Elapsed time
+		let elapsed = 0;
+		if (this.con.timeStart != 0) {
+			elapsed = (new Date().getTime() - this.con.timeStart) / 1000 + Math.random() / 1000;
+		}
+
+		// Format time [   0.000000] like that
+		const len = 11;
+		const frac = 6;
+		const n = elapsed.toFixed(frac) + '';
+		const time = n.length >= len ? n : new Array(len - n.length + 1).join('&nbsp;') + n;
+		this.con.lines.push('[' + time + '] ' + this.text)
+
+		// Update the start time if it is unset
+		if (this.con.timeStart == 0) {
+			this.con.timeStart = new Date().getTime();
+		}
+
+		// scroll down
+		let objDiv = document.getElementById("app");
+		if (objDiv) objDiv.scrollTop = objDiv.scrollHeight;
+
+		// set color
+		if (this.color != undefined) this.con.color = this.color;
+
 		return {
-			lines: ["hello", "line2"]
+			lines: this.con.lines,
+			color: this.con.color
 		}
 	}
+}
+
+export class StateBlank extends State {
+	constructor(time: number) {
+		super(Blank, time);
+	}
+	data() {}
+}
+
+export class StateSplash extends State {
+	constructor(time: number) {
+		super(Splash, time);
+	}
+	data() {}
 }
 
 export class Runner {

@@ -5,5 +5,8 @@ export class StateSplash extends State {
 	constructor(time: number) {
 		super(Splash, time);
 	}
-	data() {}
+
+	data() {
+		return {}
+	}
 }

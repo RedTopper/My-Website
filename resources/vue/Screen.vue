@@ -1,5 +1,5 @@
 <template>
-	<div id="screen">
+	<div id="screen" v-bind:style="{maxWidth: width, maxHeight: height}">
 		<component v-if="state" v-bind:is="state" v-bind="data"></component>
 	</div>
 </template>
@@ -14,10 +14,13 @@ import {StateBlank} from "../ts/States/StateBlank";
 import {StateSplash} from "../ts/States/StateSplash";
 import {StateModeColor} from "../ts/States/StateModeColor";
 import {StateConsole} from "../ts/States/StateConsole";
+import {StateResize} from "../ts/States/StateResize";
 
 let internal = {
 	state: null,
-	data: null
+	data: null,
+	width: "800px",
+	height: "600px"
 }
 
 export default {
@@ -37,9 +40,13 @@ export default {
 			new StateProgress(600, 55, "E0"),
 			new StateProgress(100, 99, "E2"),
 			new StateProgress(1000, 100, "E3"),
+			new StateBlank(0),
+			new StateResize(100, "640px", "480px"),
 			new StateBlank(600),
+			new StateResize(0, "800px", "600px"),
 			new StateSplash(1600),
-			new StateBlank(600),
+			new StateBlank(0),
+			new StateResize(0, "640px", "480px"),
 			new StateModeColor(0, con, false),
 			new StateConsole(900, con),
 			new StateConsole(20,  con, "Web version 6.9.42-generic WebDevOS SMP " + new Date() + " (WebDevOS 6.9.42~420.0-generic)"),
@@ -71,8 +78,9 @@ export default {
 			new StateConsole(0,   con, "&nbsp;&nbsp;&nbsp;&nbsp;TERM=linux"),
 			new StateConsole(0,   con, "&nbsp;&nbsp;&nbsp;&nbsp;BOOT_IMAGE=/app.js"),
 			new StateConsole(0,   con, "&nbsp;&nbsp;&nbsp;&nbsp;file=/index.html"),
-			new StateConsole(600,  con, "fbcon: Look at me, I'm the console now"),
-			new StateConsole(100,con, "Console: switching to color frame buffer device 100x37"),
+			new StateConsole(600, con, "fbcon: Look at me, I'm the console now"),
+			new StateConsole(100, con, "Console: switching to color frame buffer device 100x37"),
+			new StateResize(200, "800px", "600px"),
 			new StateModeColor(0, con, true),
 			new StateConsole(0,   con, "lp: driver loaded but no devices found"),
 			new StateConsole(50,  con, "systemd[1]: Inserted module 'autofs4'"),
@@ -80,7 +88,7 @@ export default {
 			new StateConsole(0,   con, "systemd[1]: Set hostname to &lt;awalter.net&gt;."),
 			new StateConsole(0,   con, "systemd[1]: Mounting Huge Pages File System..."),
 			new StateConsole(0,   con, "systemd[1]: Starting"),
-			new StateConsole(200,   con, "To Waste Your Time", Format.ServiceStarting),
+			new StateConsole(200, con, "To Waste Your Time", Format.ServiceStarting),
 			new StateConsole(0,   con, "Create Volatile Files and Directories", Format.ServiceFinishOK),
 			new StateConsole(0,   con, "Network Name Resolution", Format.ServiceStarting),
 			new StateConsole(100, con, "Network Time Synchronization", Format.ServiceStarting),
@@ -111,6 +119,7 @@ export default {
 			new StateConsole(600, con, "Waisting Your Time", Format.ServiceFinishOK),
 			new StateBlank(1000),
 			new StateBlank(1000, "#1c4700"),
+			new StateResize(0, null, null),
 		]).run();
 	}
 }
@@ -118,13 +127,12 @@ export default {
 
 <style lang="sass" scoped>
 #screen
-	max-width: 800px
 	width: 100%
-	height: 600px
+	height: 100%
 	border: 2px solid #222
 	padding: 5px
-	margin: 10px
 	background-color: #000
 	box-shadow: 8px 8px 8px #000
+	box-sizing: border-box
 	overflow: hidden
 </style>

@@ -16,8 +16,12 @@ export class Runner {
 	}
 
 	run() {
-		this.internal.state = this.current().comp;
-		this.internal.data = this.current().data();
+		let data = this.current().data(this.internal);
+		if (data) {
+			this.internal.state = this.current().comp;
+			this.internal.data = data;
+		}
+
 		if (this.index < this.states.length - 1) {
 			setTimeout(this.run.bind(this), this.current().time);
 			this.index++;

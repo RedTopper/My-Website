@@ -1,15 +1,17 @@
 <template>
 	<div class="bios">
 		<img class="splash" src="/img/splash.png" alt="splash">
-		<div class="progress">
-			<div>
-				<span class="text">Starting</span>
+		<div class="bottom">
+			<div class="progress">
+				<div>
+					<span class="text">Starting</span>
+				</div>
+				<div class="background">
+					<div class="filled" v-bind:style="{width: percent}"></div>
+				</div>
 			</div>
-			<div class="background">
-				<div class="filled" v-bind:style="{width: percent}"></div>
-			</div>
+			<div class="help">Press F2 to enter SETUP, F12 for Network Boot, ESC for Boot Menu</div>
 		</div>
-		<div class="help">Press F2 to enter SETUP, F12 for Network Boot, ESC for Boot Menu</div>
 		<div class="code">{{ code }}</div>
 	</div>
 </template>
@@ -29,32 +31,42 @@ export default {
 	height: 100%
 
 .splash
-	padding-top: 120px
-	margin: 0 auto
+	position: absolute
+	top: 120px
+	left: 50%
+	transform: translate(-50%, 0)
 	display: block
+	width: 100%
+	max-width: 384px
 
 .progress
 	display: flex
 	flex-direction: row
-	padding-top: 220px
-	width: 100%
-	max-width: 500px
 	margin: auto
 
-.text
+.progress .text
 	flex: 0 0 auto
 	margin-right: 10px
 
-.background
-	width: 75%
+.progress .background
 	height: 20px
 	background-color: grey
 	flex: 1 0 auto
 
-.filled
+.progress .filled
 	height: 100%
 	width: 0
 	background-color: white
+
+.bottom
+	position: absolute
+	bottom: 120px
+	left: 50%
+	transform: translate(-50%, 0)
+	width: 100%
+	max-width: 500px
+	box-sizing: border-box
+	padding: 0 20px
 
 .help
 	font-size: 10px

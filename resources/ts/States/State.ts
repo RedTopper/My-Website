@@ -9,5 +9,5 @@ export abstract class State {
 		this.time = time;
 	}
 
-	abstract data(): any;
+	abstract data(internal?: any): any;
 }

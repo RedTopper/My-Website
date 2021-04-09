@@ -2,5 +2,18 @@
     "/public/js/app.js": "/public/js/app.js",
     "/public/js/manifest.js": "/public/js/manifest.js",
     "/public/css/app.css": "/public/css/app.css",
-    "/public/js/vendor.js": "/public/js/vendor.js"
+    "/public/js/vendor.js": "/public/js/vendor.js",
+    "/public/woff/CascadiaCode.woff2": "/public/woff/CascadiaCode.woff2",
+    "/public/icon/android-chrome-192x192.png": "/public/icon/android-chrome-192x192.png",
+    "/public/icon/android-chrome-512x512.png": "/public/icon/android-chrome-512x512.png",
+    "/public/icon/apple-touch-icon.png": "/public/icon/apple-touch-icon.png",
+    "/public/icon/browserconfig.xml": "/public/icon/browserconfig.xml",
+    "/public/icon/favicon-16x16.png": "/public/icon/favicon-16x16.png",
+    "/public/icon/favicon-32x32.png": "/public/icon/favicon-32x32.png",
+    "/public/icon/favicon.ico": "/public/icon/favicon.ico",
+    "/public/icon/mstile-150x150.png": "/public/icon/mstile-150x150.png",
+    "/public/icon/safari-pinned-tab.svg": "/public/icon/safari-pinned-tab.svg",
+    "/public/icon/site.webmanifest": "/public/icon/site.webmanifest",
+    "/public/favicon.ico": "/public/favicon.ico",
+    "/public/img/splash.png": "/public/img/splash.png"
 }

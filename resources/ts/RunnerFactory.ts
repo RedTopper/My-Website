@@ -20,7 +20,20 @@ export interface Internal {
 }
 
 export class RunnerFactory {
-	static create(internal: Internal): Runner {
+	static createFast(internal: Internal): Runner {
+		let runner = new Runner(internal);
+
+		let desktop: State[] = [
+			new StateResize(0),
+			new StateBlank(750, "#000", "background.jpg"),
+			new StateDesktop(100, "background.jpg"),
+		];
+
+		runner.add(desktop);
+		return runner;
+	}
+
+	static createNormal(internal: Internal): Runner {
 		let runner = new Runner(internal);
 		let con = new ConData();
 		let conPxe = new ConData();
@@ -157,10 +170,6 @@ export class RunnerFactory {
 				{keypress: "Shift", events: pxe}
 			])
 		]
-
-		let debug: State[] = [
-			new StateBios(70, 0, "00"),
-		];
 
 		runner.add(bios);
 		return runner;

@@ -1,6 +1,6 @@
 <template>
 	<div id="screen" v-bind:style="{maxWidth: width, maxHeight: height}">
-		<component @power="power" v-if="state" v-bind:is="state" v-bind="data"></component>
+		<component @power="power" @skip="skip" v-if="state" v-bind:is="state" v-bind="data"></component>
 	</div>
 </template>
 
@@ -34,7 +34,11 @@ export default {
 	methods: {
 		power() {
 			console.log("Let's go!");
-			RunnerFactory.create(internal).start();
+			RunnerFactory.createNormal(internal).start();
+		},
+		skip() {
+			console.log("rip");
+			RunnerFactory.createFast(internal).start();
 		}
 	}
 }

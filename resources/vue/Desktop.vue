@@ -1,18 +1,18 @@
 <template>
-	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image}">
-		<div class="window" v-bind:class="{min: min}" v-bind:style="{maxWidth: max ? null : '1024px', maxHeight: max ? null : '768px', display: close ? 'none' : null}">
-			<div class="title" v-bind:class="{min: min}">
+	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image, min: min}">
+		<div class="window"  v-bind:style="{maxWidth: max ? null : '1024px', maxHeight: max ? null : '768px', display: close ? 'none' : null}">
+			<div class="title">
 				<span class="name">Terminal</span>
 				<div class="controls">
-					<div class="min" v-on:click="min = !min">
+					<div class="min" v-on:click="cmdMin">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 							<line stroke-width=".9" fill="none" shape-rendering="crispEdges" x1="1" y1="5.5" x2="11" y2="5.5"/>
 						</svg>
-					</div><div class="max" v-on:click="max = !max">
+					</div><div class="max" v-on:click="cmdMax">
 					<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
 						<rect stroke-width=".9" fill="none" x="1.5" y="1.5" width="9" height="9"/>
 					</svg>
-					</div><div class="close" v-on:click="close = true">
+					</div><div class="close" v-on:click="cmdClose">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-width=".9" fill="none" d="M1,1 l 10,10 M1,11 l 10,-10"/>
 						</svg>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
-		<div class="icon"  v-on:click="close = false">
+		<div class="icon"  v-on:click="cmdLaunch">
 			<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 524.931 524.93" xml:space="preserve">
 				<path d="M226.434,249.503c0-6.995-2.705-13.403-7.846-18.556L61.8,74.165c-5.128-5.141-11.554-7.852-18.568-7.852
 					c-7.026,0-13.452,2.717-18.556,7.846l-16.83,16.83c-5.129,5.135-7.84,11.549-7.84,18.538c0,7.026,2.717,13.452,7.846,18.556
@@ -52,6 +52,29 @@ export default {
 			max: false,
 			min: false,
 			close: true
+		}
+	},
+	methods: {
+		cmdMin: function () {
+			let self: any = this;
+			self.min = !self.min;
+		},
+		cmdMax: function () {
+			let self: any = this;
+			if (self.min) {
+				self.min = false;
+			} else {
+				self.max = !self.max;
+			}
+		},
+		cmdClose: function () {
+			let self: any = this;
+			self.close = true;
+		},
+		cmdLaunch: function () {
+			let self: any = this;
+			self.close = false;
+			self.min = false;
 		}
 	}
 }
@@ -151,9 +174,12 @@ $window-background: rgba(0, 43, 54, 0.95)
 
 // .min class is added when "-" is pressed
 // Shadow still shows when hidden, so this fixes it
-.window.min
+.min .window
 	box-shadow: 0 0
-.title.min
+	height: auto
+.min .title
 	box-shadow: $window-shadow
+.min.desktop
+	align-items: end
 
 </style>

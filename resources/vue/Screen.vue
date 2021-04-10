@@ -26,10 +26,7 @@ export default {
 	created() {
 		let self: any = this;
 		window.addEventListener('keydown', (e) => {
-			if (!self.keypress) {
-				self.keypress = e.key;
-				console.log(e.key)
-			}
+			self.keypress = e.key;
 		});
 	},
 	mounted() {

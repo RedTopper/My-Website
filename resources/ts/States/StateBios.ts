@@ -1,7 +1,7 @@
 import Boot from "../../vue/Bios.vue";
 import {State} from "./State";
 
-export class StateProgress extends State {
+export class StateBios extends State {
 	percent: number;
 	code: string;
 

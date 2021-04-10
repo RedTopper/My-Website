@@ -1,7 +1,7 @@
-import Window from "../../vue/Window.vue";
+import Window from "../../vue/Desktop.vue";
 import {State} from "./State";
 
-export class StateWindow extends State {
+export class StateDesktop extends State {
 	image?: string;
 
 	constructor(time: number, image?: string) {

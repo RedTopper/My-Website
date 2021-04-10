@@ -2,11 +2,11 @@ import {Runner} from "./Runner";
 import {State} from "./States/State";
 import {StateBlank} from "./States/StateBlank";
 import {StateResize} from "./States/StateResize";
-import {StateWindow} from "./States/StateWindow";
+import {StateDesktop} from "./States/StateDesktop";
 import {ConData, Format} from "./ConData";
 import {StateModeColor} from "./States/StateModeColor";
 import {StateConsole} from "./States/StateConsole";
-import {StateProgress} from "./States/StateProgress";
+import {StateBios} from "./States/StateBios";
 import {StateSplash} from "./States/StateSplash";
 import {StateKey} from "./States/StateKey";
 import {Component} from "vue";
@@ -25,12 +25,13 @@ export class RunnerFactory {
 		let con = new ConData();
 		let conPxe = new ConData();
 
-		let os: State[] = [
-			new StateBlank(1000),
+		let desktop: State[] = [
+			new StateSplash(2000, true),
+			new StateBlank(200),
 			new StateBlank(1000, "#202020"),
 			new StateResize(1000),
 			new StateBlank(2000, "#202020", "background.jpg"),
-			new StateWindow(0, "background.jpg"),
+			new StateDesktop(0, "background.jpg"),
 		]
 
 		let console: State[] = [
@@ -124,28 +125,33 @@ export class RunnerFactory {
 			new StateConsole(1000,   conPxe, "My IP is 10.0.0.100", Format.None),
 		]
 
-		console = console.concat(os);
+		console = console.concat(desktop);
 		pxe = pxe.concat(console);
 
 		let bios: State[] = [
-			new StateProgress(70, 0, "00"),
-			new StateProgress(60, 2, "01"),
-			new StateProgress(400, 5, "06"),
-			new StateProgress(90, 15, "10"),
-			new StateProgress(150, 40, "2B"),
-			new StateProgress(600, 55, "E0"),
-			new StateProgress(900, 95, "E2"),
-			new StateProgress(1000, 100, "E3"),
+			new StateBios(70, 0, "00"),
+			new StateBios(60, 2, "01"),
+			new StateBios(400, 5, "06"),
+			new StateBios(90, 15, "10"),
+			new StateBios(150, 40, "2B"),
+			new StateBios(600, 55, "E0"),
+			new StateBios(900, 95, "E2"),
+			new StateBios(1000, 100, "E3"),
 			new StateBlank(0),
 			new StateResize(0, "640px", "480px"),
 			new StateBlank(600),
 			new StateResize(0, "800px", "600px"),
-			new StateSplash(1600),
+			new StateSplash(800),
 			new StateKey(0, [
-				{keypress: "", events: os},
+				{keypress: "", events: desktop},
 				{keypress: "Shift", events: pxe}
 			])
 		]
+
+		let debug: State[] = [
+			new StateSplash(500),
+			new StateSplash(500, true),
+		];
 
 		runner.add(bios);
 		return runner;

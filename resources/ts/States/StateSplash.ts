@@ -2,11 +2,16 @@ import Splash from "../../vue/Splash.vue";
 import {State} from "./State";
 
 export class StateSplash extends State {
-	constructor(time: number) {
+	load: boolean
+
+	constructor(time: number, load: boolean = false) {
 		super(Splash, time);
+		this.load = load;
 	}
 
 	data() {
-		return {}
+		return {
+			load: this.load
+		}
 	}
 }

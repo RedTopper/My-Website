@@ -19,7 +19,7 @@ export default {
 
 .splash
 	position: absolute
-	top: 120px
+	top: 90px
 	left: 50%
 	transform: translate(-50%, 0)
 	display: block

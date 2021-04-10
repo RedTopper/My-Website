@@ -10,7 +10,7 @@
 					<div class="filled" v-bind:style="{width: percent}"></div>
 				</div>
 			</div>
-			<div class="help">Press F2 to enter SETUP, F12 for Network Boot, ESC for Boot Menu</div>
+			<div class="help">{{ help }}</div>
 		</div>
 		<div class="code">{{ code }}</div>
 	</div>
@@ -19,7 +19,17 @@
 <script lang="ts">
 export default {
 	name: "Boot",
-	props: ["code", "percent"]
+	props: ["code", "percent", "keypress"],
+	computed: {
+		help: function () {
+			let self: any = this;
+			let text = "Press Enter to enter SETUP, Shift for Network Boot, ESC for Boot Menu";
+			if (self.keypress == "Shift") text = "Starting PXE boot...";
+			if (self.keypress == "Escape") text = "Entering boot menu...";
+			if (self.keypress == "Enter") text = "Entering setup...";
+			return text;
+		}
+	}
 }
 </script>
 
@@ -32,7 +42,7 @@ export default {
 
 .splash
 	position: absolute
-	top: 120px
+	top: 90px
 	left: 50%
 	transform: translate(-50%, 0)
 	display: block

@@ -1,13 +1,14 @@
 import {Component} from "vue";
+import {Runner} from "../Runner";
 
 export abstract class State {
 	time: number;
-	comp: Component;
+	comp: Component | null;
 
-	protected constructor(comp: Component, time: number) {
+	protected constructor(comp: Component | null, time: number) {
 		this.comp = comp;
 		this.time = time;
 	}
 
-	abstract data(internal?: any): any;
+	abstract data(runner?: Runner): any;
 }

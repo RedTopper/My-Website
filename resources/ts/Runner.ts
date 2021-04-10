@@ -1,25 +1,32 @@
-import {Component} from "vue";
 import {State} from "./States/State";
+import {Internal} from "./RunnerFactory";
 
 export class Runner {
-	states: State[];
-	internal:  {state: Component | null, data: any};
+	states: State[] = [];
+	internal:  Internal;
 	index: number = 0;
 
-	constructor(internal: {state: Component | null, data: any}, states: State[]) {
+	constructor(internal: Internal) {
 		this.internal = internal;
-		this.states = states;
 	}
 
 	current(): State {
 		return this.states[this.index];
 	}
 
+	add(states: State[]) {
+		this.states = this.states.concat(states);
+	}
+
 	run() {
-		let data = this.current().data(this.internal);
+		let data = this.current().data(this);
 		if (data) {
-			this.internal.state = this.current().comp;
+			data.keypress = this.internal.keypress;
 			this.internal.data = data;
+		}
+
+		if (this.current().comp) {
+			this.internal.state = this.current().comp;
 		}
 
 		if (this.index < this.states.length - 1) {

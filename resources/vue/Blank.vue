@@ -1,6 +1,5 @@
 <template>
-	<div class="console" v-bind:style="{backgroundColor: color, backgroundImage: image}" v-bind:class="{fade: !!image}">
-	</div>
+	<div class="console" v-bind:style="{backgroundColor: color, backgroundImage: image}" v-bind:class="{fade: !!image}"></div>
 </template>
 
 <script>

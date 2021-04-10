@@ -1,4 +1,4 @@
-import Boot from "../../vue/Boot.vue";
+import Boot from "../../vue/Bios.vue";
 import {State} from "./State";
 
 export class StateProgress extends State {

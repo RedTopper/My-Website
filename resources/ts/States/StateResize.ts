@@ -1,22 +1,20 @@
 import {State} from "./State";
-import Boot from "../../vue/Boot.vue";
+import {Runner} from "../Runner";
 
 export class StateResize extends State {
-	width: string;
-	height: string;
+	width: string | null;
+	height: string | null;
 
-	constructor(time: number, width: string, height: string) {
-		super(Boot, time);
+	constructor(time: number, width: string | null = null, height: string | null = null) {
+		super(null, time);
 		this.width = width;
 		this.height = height;
 	}
 
-	data(internal: any): any {
-		if (internal) {
-			internal.width = this.width;
-			internal.height = this.height;
+	data(runner: Runner): any {
+		if (runner.internal) {
+			runner.internal.width = this.width;
+			runner.internal.height = this.height;
 		}
-
-		return null;
 	}
 }

@@ -8,13 +8,11 @@
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 							<line stroke-width=".9" fill="none" shape-rendering="crispEdges" x1="1" y1="5.5" x2="11" y2="5.5"/>
 						</svg>
-					</div>
-					<div class="max">
+					</div><div class="max">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
 							<rect stroke-width=".9" fill="none" x="1.5" y="1.5" width="9" height="9"/>
 						</svg>
-					</div>
-					<div class="close">
+					</div><div class="close">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-width=".9" fill="none" d="M1,1 l 10,10 M1,11 l 10,-10"/>
 						</svg>
@@ -97,5 +95,9 @@ $window-background: rgba(0, 43, 54, 0.95)
 
 .accent
 	color: $window-color-accent
+
+@media only screen and (max-width: 600px)
+	.console
+		padding: 0
 
 </style>

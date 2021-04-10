@@ -121,9 +121,8 @@ export default {
 			new StateBlank(1000),
 			new StateBlank(1000, "#202020"),
 			new StateResize(1000, null, null),
-			new StateBlank(3000, "#202020", "background.jpg"),
-			new StateWindow(1000, "background.jpg"),
-
+			new StateBlank(2000, "#202020", "background.jpg"),
+			new StateWindow(0, "background.jpg"),
 		]).run();
 	}
 }

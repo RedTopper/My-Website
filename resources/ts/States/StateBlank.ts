@@ -3,15 +3,23 @@ import {State} from "./State";
 
 export class StateBlank extends State {
 	color: string;
+	image?: string;
 
-	constructor(time: number, color: string = "#000") {
+	constructor(time: number, color: string = "#000", image?: string) {
 		super(Blank, time);
 		this.color = color;
+		this.image = image;
 	}
 
 	data() {
+		let image = "";
+		if (this.image) {
+			image = "url('/img/" + this.image + "')"
+		}
+
 		return {
-			color: this.color
+			color: this.color,
+			image: image
 		}
 	}
 }

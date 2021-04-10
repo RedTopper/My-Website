@@ -18,7 +18,11 @@ export default {
 	height: 100%
 
 .splash
-	padding-top: 120px
-	margin: 0 auto
+	position: absolute
+	top: 120px
+	left: 50%
+	transform: translate(-50%, 0)
 	display: block
+	width: 100%
+	max-width: 384px
 </style>

@@ -11,6 +11,7 @@ import {ConData, Format} from "../ts/ConData";
 import {Runner} from "../ts/Runner";
 import {StateProgress} from "../ts/States/StateProgress";
 import {StateBlank} from "../ts/States/StateBlank";
+import {StateWindow} from "../ts/States/StateWindow";
 import {StateSplash} from "../ts/States/StateSplash";
 import {StateModeColor} from "../ts/States/StateModeColor";
 import {StateConsole} from "../ts/States/StateConsole";
@@ -118,8 +119,11 @@ export default {
 			new StateConsole(500, con, "Hold until boot process finishes up", Format.ServiceStarting),
 			new StateConsole(600, con, "Waisting Your Time", Format.ServiceFinishOK),
 			new StateBlank(1000),
-			new StateBlank(1000, "#1c4700"),
-			new StateResize(0, null, null),
+			new StateBlank(1000, "#202020"),
+			new StateResize(1000, null, null),
+			new StateBlank(3000, "#202020", "background.jpg"),
+			new StateWindow(1000, "background.jpg"),
+
 		]).run();
 	}
 }

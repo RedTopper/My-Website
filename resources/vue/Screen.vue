@@ -1,17 +1,16 @@
 <template>
 	<div id="screen" v-bind:style="{maxWidth: width, maxHeight: height}">
-		<component v-if="state" v-bind:is="state" v-bind="data"></component>
+		<component @power="power" v-if="state" v-bind:is="state" v-bind="data"></component>
 	</div>
 </template>
 
 <script lang="ts">
-import Boot from "./Bios.vue";
-import Console from "./Console.vue";
+import Power from "./Power.vue";
 import {Internal, RunnerFactory} from "../ts/RunnerFactory";
 
 let internal: Internal = {
 	keypress: null,
-	state: null,
+	state: Power,
 	data: null,
 	width: "800px",
 	height: "600px",
@@ -22,15 +21,21 @@ export default {
 	data(): Internal {
 		return internal;
 	},
-	components: {Boot, Console},
 	created() {
 		let self: any = this;
 		window.addEventListener('keydown', (e) => {
 			self.keypress = e.key;
+			if (self.state == Power) {
+				self.power();
+				self.keypress = null;
+			}
 		});
 	},
-	mounted() {
-		RunnerFactory.create(internal).run();
+	methods: {
+		power() {
+			console.log("Let's go!");
+			RunnerFactory.create(internal).start();
+		}
 	}
 }
 </script>

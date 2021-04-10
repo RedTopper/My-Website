@@ -2,36 +2,43 @@ import {State} from "./States/State";
 import {Internal} from "./RunnerFactory";
 
 export class Runner {
-	states: State[] = [];
+	private states: State[] = [];
+	private running: boolean = false;
+
 	internal:  Internal;
-	index: number = 0;
 
 	constructor(internal: Internal) {
 		this.internal = internal;
 	}
 
-	current(): State {
-		return this.states[this.index];
-	}
-
-	add(states: State[]) {
+	public add(states: State[]) {
 		this.states = this.states.concat(states);
 	}
 
-	run() {
-		let data = this.current().data(this);
+	public start() {
+		if (!this.running) {
+			this.running = true;
+			this.run();
+		}
+	}
+
+	private run() {
+		let current = this.states.shift();
+		if (!current) {
+			this.running = false;
+			return;
+		}
+
+		let data = current.data(this);
 		if (data) {
 			data.keypress = this.internal.keypress;
 			this.internal.data = data;
 		}
 
-		if (this.current().comp) {
-			this.internal.state = this.current().comp;
+		if (current.comp) {
+			this.internal.state = current.comp;
 		}
 
-		if (this.index < this.states.length - 1) {
-			setTimeout(this.run.bind(this), this.current().time);
-			this.index++;
-		}
+		setTimeout(this.run.bind(this), current.time);
 	}
 }

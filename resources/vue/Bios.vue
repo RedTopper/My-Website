@@ -18,15 +18,15 @@
 
 <script lang="ts">
 export default {
-	name: "Boot",
+	name: "Bios",
 	props: ["code", "percent", "keypress"],
 	computed: {
 		help: function () {
 			let self: any = this;
 			let text = "Press Enter to enter SETUP, Shift for Network Boot, ESC for Boot Menu";
 			if (self.keypress == "Shift") text = "Starting PXE boot...";
-			if (self.keypress == "Escape") text = "Entering boot menu...";
-			if (self.keypress == "Enter") text = "Entering setup...";
+			if (self.keypress == "Escape") text = "Not yet implemented!";
+			if (self.keypress == "Enter") text = "Not yet implemented!";
 			return text;
 		}
 	}
@@ -34,6 +34,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@use "./resources/sass/app"
+
 .bios
 	color: white
 	position: relative
@@ -42,7 +44,7 @@ export default {
 
 .splash
 	position: absolute
-	top: 90px
+	top: app.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 	display: block
@@ -70,7 +72,7 @@ export default {
 
 .bottom
 	position: absolute
-	bottom: 120px
+	bottom: app.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 	width: 100%

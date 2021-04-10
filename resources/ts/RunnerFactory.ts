@@ -26,13 +26,19 @@ export class RunnerFactory {
 		let conPxe = new ConData();
 
 		let desktop: State[] = [
-			new StateSplash(2000, true),
 			new StateBlank(200),
 			new StateBlank(1000, "#202020"),
 			new StateResize(1000),
 			new StateBlank(2000, "#202020", "background.jpg"),
 			new StateDesktop(0, "background.jpg"),
 		]
+
+		let desktopEnter: State[] = [
+			new StateSplash(2000, true),
+		]
+
+		// DesktopEnter chains into Desktop
+		desktopEnter = desktopEnter.concat(desktop);
 
 		let console: State[] = [
 			new StateResize(0, "640px", "480px"),
@@ -108,6 +114,9 @@ export class RunnerFactory {
 			new StateConsole(600, con, "Waisting Your Time", Format.ServiceFinishOK),
 		]
 
+		// Console will chain into Desktop
+		console = console.concat(desktop);
+
 		let pxe: State[] = [
 			new StateBlank(0),
 			new StateResize(0, "640px", "480px"),
@@ -125,7 +134,7 @@ export class RunnerFactory {
 			new StateConsole(1000,   conPxe, "My IP is 10.0.0.100", Format.None),
 		]
 
-		console = console.concat(desktop);
+		// PXE will chain into Console
 		pxe = pxe.concat(console);
 
 		let bios: State[] = [
@@ -143,14 +152,14 @@ export class RunnerFactory {
 			new StateResize(0, "800px", "600px"),
 			new StateSplash(800),
 			new StateKey(0, [
-				{keypress: "", events: desktop},
+				// Normal boot gets a loading wheel
+				{keypress: "", events: desktopEnter},
 				{keypress: "Shift", events: pxe}
 			])
 		]
 
 		let debug: State[] = [
-			new StateSplash(500),
-			new StateSplash(500, true),
+			new StateBios(70, 0, "00"),
 		];
 
 		runner.add(bios);

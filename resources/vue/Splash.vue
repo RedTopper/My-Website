@@ -25,6 +25,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@use "./resources/sass/app"
+
 .splash
 	color: white
 	position: relative
@@ -33,7 +35,7 @@ export default {
 
 .logo
 	position: absolute
-	top: 90px
+	top: app.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 	display: block
@@ -42,7 +44,7 @@ export default {
 
 .load
 	position: absolute
-	bottom: 120px
+	bottom: app.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 

@@ -78,4 +78,11 @@ export default {
 	right: 0
 	bottom: 0
 
+@media screen and (max-height: 500px)
+	.splash
+		top: 20px
+
+	.bottom
+		bottom: 20px
+
 </style>

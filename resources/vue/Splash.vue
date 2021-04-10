@@ -25,4 +25,8 @@ export default {
 	display: block
 	width: 100%
 	max-width: 384px
+
+@media screen and (max-height: 500px)
+	.splash
+		top: 20px
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image}">
-		<div class="window" v-bind:style="{maxWidth: max ? null : '800px', maxHeight: max ? null : '600px', display: close ? 'none' : null}">
-			<div class="title">
+		<div class="window" v-bind:class="{min: min}" v-bind:style="{maxWidth: max ? null : '800px', maxHeight: max ? null : '600px', display: close ? 'none' : null}">
+			<div class="title" v-bind:class="{min: min}">
 				<span class="name">Terminal</span>
 				<div class="controls">
 					<div class="min" v-on:click="min = !min">
@@ -92,6 +92,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+$window-shadow: 0 0 8px 2px #000
 $window-control-height: 32px
 $window-accents: #2B2B2B
 $window-control-color: #EEE
@@ -137,13 +138,20 @@ $window-background: rgba(0, 43, 54, 0.95)
 	height: 100%
 	display: flex
 	flex-direction: column
+	box-shadow: $window-shadow
 	z-index: 1
+
+.window.min
+	box-shadow: 0 0
 
 .title
 	height: $window-control-height
 	background-color: $window-accents
 	color: $window-control-color
 	flex: 0 0 auto
+
+.title.min
+	box-shadow: $window-shadow
 
 .frame
 	background: $window-background
@@ -155,16 +163,6 @@ $window-background: rgba(0, 43, 54, 0.95)
 	width: 100%
 	position: relative
 	box-sizing: border-box
-
-.frame:before, .title:before
-	content: ""
-	box-shadow: 0 0 8px 2px #000
-	z-index: -1
-	position: absolute
-	top: 0
-	bottom: 0
-	left: 0
-	right: 0
 
 .controls
 	float: right

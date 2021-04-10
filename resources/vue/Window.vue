@@ -1,8 +1,8 @@
 <template>
-	<div class="console" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image}">
-		<div class="container" v-bind:style="{maxWidth: max ? null : '800px', maxHeight: max ? null : '600px'}">
+	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image}">
+		<div class="window" v-bind:style="{maxWidth: max ? null : '800px', maxHeight: max ? null : '600px'}">
 			<div class="title">
-				<span class="text">Terminal</span>
+				<span class="name">Terminal</span>
 				<div class="controls">
 					<div class="min" v-on:click="min = !min">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="window" v-bind:style="{display: min ? 'none' : null}">
+			<div class="frame" v-bind:style="{display: min ? 'none' : null}">
 				<div class="content">
 					<p><span class="accent-green">user@awalter.net</span>:<span class="accent-blue">~</span>$ cat welcome.txt</p><br>
 
@@ -81,7 +81,7 @@ $window-color-accent-gold: #B58900
 $window-color-accent-pink: #D33682
 $window-background: rgba(0, 43, 54, 0.95)
 
-.console
+.desktop
 	height: 100%
 	background-position: center
 	background-repeat: no-repeat
@@ -91,16 +91,11 @@ $window-background: rgba(0, 43, 54, 0.95)
 	justify-content: center
 	align-items: center
 
-.container
+.window
 	width: 100%
 	height: 100%
 	display: flex
 	flex-direction: column
-
-.window
-	background: $window-background
-	overflow-y: auto
-	flex: 1 1 auto
 
 .title
 	height: $window-control-height
@@ -108,13 +103,18 @@ $window-background: rgba(0, 43, 54, 0.95)
 	color: $window-control-color
 	flex: 0 0 auto
 
-.window, .title
+.frame
+	background: $window-background
+	overflow-y: auto
+	flex: 1 1 auto
+
+.frame, .title
 	border: 1px solid $window-accents
 	width: 100%
 	position: relative
 	box-sizing: border-box
 
-.window:before, .title:before
+.frame:before, .title:before
 	content: ""
 	box-shadow: 0 0 8px 2px #000
 	z-index: -1
@@ -130,23 +130,23 @@ $window-background: rgba(0, 43, 54, 0.95)
 	display: flex
 	flex-direction: row
 
-.title .close, .title .max, .title .min
+.controls .close, .controls .max, .controls .min
 	width: $window-control-height
 	height: $window-control-height
 	display: flex
 	justify-content: center
 	align-items: center
 
-.title .close:hover
+.controls .close:hover
 	background-color: red
 
-.title .min:hover, .title .max:hover
+.controls .min:hover, .controls .max:hover
 	background-color: #222
 
-.title svg
+.controls svg
 	stroke: $window-control-color
 
-.title .text
+.title .name
 	height: $window-control-height
 	line-height: $window-control-height
 	margin-left: 5px
@@ -156,6 +156,16 @@ $window-background: rgba(0, 43, 54, 0.95)
 .content
 	padding: 5px
 	color: $window-color-primary
+
+.content a
+	text-decoration: none
+	color: $window-color-accent-blue
+
+.content p
+	margin: 8px 0 0
+
+.content p:first-child
+	margin: 0
 
 .accent-red
 	color: $window-color-accent-red
@@ -167,14 +177,5 @@ $window-background: rgba(0, 43, 54, 0.95)
 	color: $window-color-accent-gold
 .accent-pink
 	color: $window-color-accent-pink
-a
-	text-decoration: none
-	color: $window-color-accent-blue
-
-p
-	margin: 8px 0 0
-
-p:first-child
-	margin: 0
 
 </style>

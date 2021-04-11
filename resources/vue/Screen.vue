@@ -6,14 +6,15 @@
 
 <script lang="ts">
 import Power from "./Power.vue";
-import {StateFactory} from "../ts/StateFactory";
-import {Runner} from "../ts/Runner";
+import {StateFactory} from "../ts/App/StateFactory";
+import {Runner} from "../ts/App/Runner";
 
 import {Component, Vue} from "vue-property-decorator";
 import {Component as VueComponent} from "vue";
+import {IScreen} from "../ts/App/IScreen";
 
 @Component
-export default class Screen extends Vue {
+export default class Screen extends Vue implements IScreen {
 	private runner: Runner;
 	private component: VueComponent = Power;
 	private componentData: any = null;

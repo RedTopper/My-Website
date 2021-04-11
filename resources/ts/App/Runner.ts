@@ -1,13 +1,12 @@
-import {State} from "./States/State";
-import Screen from "../vue/Screen.vue";
-import Vue from "vue";
+import {State} from "../States/State";
+import {IScreen} from "./IScreen";
 
 export class Runner {
 	private states: State[] = [];
 	private running: boolean = false;
-	private screen: Screen;
+	private readonly screen: IScreen;
 
-	constructor(screen: Screen) {
+	constructor(screen: IScreen) {
 		this.screen = screen;
 	}
 
@@ -22,7 +21,7 @@ export class Runner {
 		}
 	}
 
-	public getScreen(): Screen {
+	public getScreen(): IScreen {
 		return this.screen;
 	}
 

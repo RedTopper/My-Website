@@ -1,14 +1,14 @@
 <template>
 	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image, min: min}">
-		<div class="window"  v-bind:style="{maxWidth: max ? null : width, maxHeight: max ? null : height, display: close ? 'none' : null}">
+		<div class="window"  v-bind:style="{maxWidth: max ? null : app.width, maxHeight: max ? null : app.height, display: close ? 'none' : null}">
 			<div class="title">
-				<span class="name">{{ title }}</span>
+				<span class="name">{{ app.title }}</span>
 				<div class="controls">
 					<div class="min" v-on:click="cmdMin">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
 							<line stroke-width=".9" fill="none" shape-rendering="crispEdges" x1="1" y1="5.5" x2="11" y2="5.5"/>
 						</svg>
-					</div><div class="max" v-on:click="cmdMax">
+					</div><div class="max" v-on:click="cmdMax" v-bind:style="{display: app.maximizable ? null : 'none'}">
 					<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
 						<rect stroke-width=".9" fill="none" x="1.5" y="1.5" width="9" height="9"/>
 					</svg>
@@ -20,49 +20,52 @@
 				</div>
 			</div>
 			<div class="frame" v-bind:style="{display: min ? 'none' : null}">
-				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-bind:is="page"></component>
+				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-bind:is="app.app"></component>
 			</div>
 		</div>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
 		<div class="icons">
-			<div v-for="(launch, index) in icons" :key="index" v-on:click="cmdLaunch(launch.page, launch.width, launch.height, launch.title)">
-				<component v-bind:is="launch.icon"></component>
+			<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app)">
+				<component v-bind:is="app.icon"></component>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import Blank from "./Blank.vue";
-import Welcome from "./Pages/Welcome.vue";
-import Reboot from "./Pages/Reboot.vue";
 import LauncherWelcome from "./Launchers/LauncherWelcome.vue";
 import LauncherReboot from "./Launchers/LauncherReboot.vue";
-import {Component as VueComponent} from "vue";
+import Welcome from "./Pages/Welcome.vue";
+import Reboot from "./Pages/Reboot.vue";
+import {IApp} from "../ts/App/IApp"
 import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 
-interface Launch {
-	icon: VueComponent,
-	page: VueComponent,
-	width: string,
-	height: string,
-	title: string,
-}
+let apps: IApp[] = [
+	{
+		width: "280px",
+		height: "136px",
+		title: "Power Options",
+		maximizable: false,
+		icon: LauncherReboot,
+		app: Reboot
+	},
+	{
+		width: "775px",
+		height: "485px",
+		title: "Terminal",
+		maximizable: true,
+		icon: LauncherWelcome,
+		app: Welcome
+	}
+]
 
 @Component
 export default class Desktop extends Vue {
 	private min: boolean = false;
 	private max: boolean = false;
-	private close: boolean = true;
-	private page: VueComponent = Blank;
-	private width: string = "640px";
-	private height: string = "480px";
-	private title: string = "Missingno";
-
-	private icons: Launch[] = [
-		{icon: LauncherReboot, page: Reboot, width: "280px", height: "120px", title: "Power Options"},
-		{icon: LauncherWelcome, page: Welcome, width: "1024px", height: "768px", title: "Terminal"}
-	]
+	private close: boolean = false;
+	private app: IApp = apps[1];
+	private apps: IApp[] = apps;
 
 	@Prop() color!: string;
 	@Prop() image!: string;
@@ -74,7 +77,7 @@ export default class Desktop extends Vue {
 	cmdMax() {
 		if (this.min) {
 			this.min = false;
-		} else {
+		} else if (this.app.maximizable) {
 			this.max = !this.max;
 		}
 	}
@@ -83,21 +86,19 @@ export default class Desktop extends Vue {
 		this.close = true;
 	}
 
+	cmdLaunch(app: IApp) {
+		if (!app.maximizable) this.max = false;
+		this.close = false;
+		this.min = false;
+		this.app = app;
+	}
+
 	// Re-emit event
 	@Emit()
 	cmdShutdown() {}
 
 	@Emit()
 	cmdReboot() {}
-
-	cmdLaunch(page: VueComponent, width: string, height: string, title: string) {
-		this.page = page;
-		this.close = false;
-		this.min = false;
-		this.width = width;
-		this.height = height;
-		this.title = title;
-	}
 }
 </script>
 
@@ -194,7 +195,7 @@ $window-background: rgba(0, 43, 54, 0.97)
 .title .name
 	height: $window-control-height
 	line-height: $window-control-height
-	margin-left: 5px
+	margin-left: 8px
 	vertical-align: middle
 	display: inline-block
 

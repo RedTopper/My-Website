@@ -1,14 +1,14 @@
-import {State} from "./States/State";
-import {StateBlank} from "./States/StateBlank";
-import {StateResize} from "./States/StateResize";
-import {StateDesktop} from "./States/StateDesktop";
+import {State} from "../States/State";
+import {StateBlank} from "../States/StateBlank";
+import {StateResize} from "../States/StateResize";
+import {StateDesktop} from "../States/StateDesktop";
 import {ConData, Format} from "./ConData";
-import {StateModeColor} from "./States/StateModeColor";
-import {StateConsole} from "./States/StateConsole";
-import {StateBios} from "./States/StateBios";
-import {StateSplash} from "./States/StateSplash";
-import {StateKey} from "./States/StateKey";
-import {StatePower} from "./States/StatePower";
+import {StateModeColor} from "../States/StateModeColor";
+import {StateConsole} from "../States/StateConsole";
+import {StateBios} from "../States/StateBios";
+import {StateSplash} from "../States/StateSplash";
+import {StateKey} from "../States/StateKey";
+import {StatePower} from "../States/StatePower";
 
 export class StateFactory {
 	static createFast(): State[] {

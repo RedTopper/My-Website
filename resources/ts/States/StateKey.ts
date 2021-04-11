@@ -1,5 +1,5 @@
 import {State} from "./State";
-import {Runner} from "../Runner";
+import {Runner} from "../App/Runner";
 
 export interface Fork {
 	keypress: string,

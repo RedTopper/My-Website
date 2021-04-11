@@ -1,6 +1,6 @@
 import Console from "../../vue/Console.vue";
 import {State} from "./State";
-import {ConData} from "../ConData";
+import {ConData} from "../App/ConData";
 
 export class StateModeColor extends State {
 	grey: boolean;

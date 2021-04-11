@@ -7,7 +7,9 @@
 </template>
 
 <script lang="ts">
+import LauncherReboot from "../Launchers/LauncherReboot.vue";
 import {Component, Emit, Vue} from "vue-property-decorator";
+import {IApp} from "../../ts/App/IApp";
 
 @Component
 export default class Reboot extends Vue {
@@ -37,8 +39,10 @@ export default class Reboot extends Vue {
 .button
 	margin: 0 10px
 	width: 100px
-	height: 20px
-	border: 2px solid white
+	height: 22px
+	line-height: 22px
 	background-color: lightgray
 	color: black
+	box-shadow: 0 0 3px 1px
+	padding: 3px
 </style>

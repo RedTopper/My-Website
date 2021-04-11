@@ -1,5 +1,5 @@
 import {Component} from "vue";
-import {Runner} from "../Runner";
+import {Runner} from "../App/Runner";
 
 export abstract class State {
 	time: number;

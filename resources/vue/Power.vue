@@ -1,14 +1,14 @@
 <template>
 	<div class="screen">
 		<div class="power">
-			<div class="button" v-on:click="cmdPower">
+			<div class="button" v-on:click="cmdPower" tabindex="0">
 				<IconPower></IconPower>
 			</div>
 			<div class="help">Tap to boot</div>
 			<div class="help-small">or press any key</div>
 		</div>
 
-		<div class="skip" v-on:click="cmdSkip">
+		<div class="skip" v-on:click="cmdSkip" tabindex="0">
 			<div class="button">
 				<IconSkip></IconSkip>
 			</div>

@@ -15,7 +15,8 @@ export class StateKey extends State {
 	}
 
 	data(runner: Runner): any {
-		if (!runner.getScreen()) {
+		if (this.choices.length == 0) {
+			runner.getScreen().resetKeypress();
 			return null
 		}
 

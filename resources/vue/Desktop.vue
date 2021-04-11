@@ -1,6 +1,6 @@
 <template>
 	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image, min: min}">
-		<div class="window"  v-bind:style="{maxWidth: max ? null : app.width, maxHeight: max ? null : app.height, display: close ? 'none' : null}">
+		<div class="window"  v-bind:style="{maxWidth: max ? null : app.width+'px', maxHeight: max ? null : app.height+'px', display: close ? 'none' : null}">
 			<div class="title">
 				<span class="name">{{ app.title }}</span>
 				<div class="controls">
@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="frame" v-bind:style="{display: min ? 'none' : null}">
-				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-bind:is="app.app"></component>
+				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-bind:is="app.app"/>
 			</div>
 		</div>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
@@ -42,16 +42,16 @@ import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 
 let apps: IApp[] = [
 	{
-		width: "280px",
-		height: "136px",
+		width: 280,
+		height: 136,
 		title: "Power Options",
 		maximizable: false,
 		icon: LauncherReboot,
 		app: Reboot
 	},
 	{
-		width: "775px",
-		height: "485px",
+		width: 775,
+		height: 485,
 		title: "Terminal",
 		maximizable: true,
 		icon: LauncherWelcome,
@@ -63,12 +63,19 @@ let apps: IApp[] = [
 export default class Desktop extends Vue {
 	private min: boolean = false;
 	private max: boolean = false;
-	private close: boolean = false;
+	private close: boolean = true;
 	private app: IApp = apps[1];
 	private apps: IApp[] = apps;
 
 	@Prop() color!: string;
 	@Prop() image!: string;
+
+	mounted() {
+		let self = this;
+		setTimeout(function () {
+			self.cmdLaunch(apps[1]);
+		}, 800)
+	}
 
 	cmdMin() {
 		this.min = !this.min;
@@ -87,7 +94,12 @@ export default class Desktop extends Vue {
 	}
 
 	cmdLaunch(app: IApp) {
-		if (!app.maximizable) this.max = false;
+		if (!app.maximizable) {
+			this.max = false;
+		} else {
+			this.max = window.innerWidth < app.width || this.max;
+		}
+
 		this.close = false;
 		this.min = false;
 		this.app = app;

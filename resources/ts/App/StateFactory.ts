@@ -13,6 +13,7 @@ import {StatePower} from "../States/StatePower";
 export class StateFactory {
 	static createFast(): State[] {
 		return [
+			new StateBlank(10, "#000"),
 			new StateResize(0),
 			new StateBlank(750, "#000", "background.jpg"),
 			new StateDesktop(100, "background.jpg"),
@@ -29,6 +30,8 @@ export class StateFactory {
 		]
 	}
 
+	// This is used for showing a splash if the user boots normally
+	// (as in not chaining from the Kernel or something)
 	static createDesktopEnter(): State[] {
 		let desktopEnter: State[] =  [
 			new StateSplash(2000, true),
@@ -141,6 +144,7 @@ export class StateFactory {
 	static createBios(): State[] {
 		return [
 			new StateResize(0, "800px", "600px"),
+			new StateKey(0, []),
 			new StateBios(70, 0, "00"),
 			new StateBios(60, 2, "01"),
 			new StateBios(400, 5, "06"),
@@ -179,6 +183,8 @@ export class StateFactory {
 			new StatePower(0)
 		]
 
+		// Shutdown has the same as the reboot sequence but ends in
+		// the StatePower() event.
 		return reboot.concat(shutdown);
 	}
 }

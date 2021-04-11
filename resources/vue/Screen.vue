@@ -1,6 +1,6 @@
 <template>
 	<div id="screen" v-bind:style="{maxWidth: width, maxHeight: height}">
-		<component @cmd-power="cmdPower" @cmd-skip="cmdSkip" @cmd-reboot="cmdReboot" v-if="component" v-bind:is="component" v-bind="componentData"></component>
+		<component @cmd-power="cmdPower" @cmd-skip="cmdSkip" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-if="component" v-bind:is="component" v-bind="componentData"></component>
 	</div>
 </template>
 
@@ -51,9 +51,15 @@ export default class Screen extends Vue {
 	}
 
 	cmdReboot() {
-		console.log("Goodbye!");
+		console.log("Rebooting...");
 		this.runner.add(StateFactory.createReboot());
 		this.runner.add(StateFactory.createBios());
+		this.runner.start();
+	}
+
+	cmdShutdown() {
+		console.log("Goodbye!");
+		this.runner.add(StateFactory.createShutdown());
 		this.runner.start();
 	}
 

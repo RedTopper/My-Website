@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="frame" v-bind:style="{display: min ? 'none' : null}">
-				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" v-bind:is="page"></component>
+				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-bind:is="page"></component>
 			</div>
 		</div>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
@@ -60,7 +60,7 @@ export default class Desktop extends Vue {
 	private title: string = "Missingno";
 
 	private icons: Launch[] = [
-		{icon: LauncherReboot, page: Reboot, width: "300px", height: "100px", title: "Really Reboot?"},
+		{icon: LauncherReboot, page: Reboot, width: "280px", height: "120px", title: "Power Options"},
 		{icon: LauncherWelcome, page: Welcome, width: "1024px", height: "768px", title: "Terminal"}
 	]
 
@@ -84,6 +84,9 @@ export default class Desktop extends Vue {
 	}
 
 	// Re-emit event
+	@Emit()
+	cmdShutdown() {}
+
 	@Emit()
 	cmdReboot() {}
 

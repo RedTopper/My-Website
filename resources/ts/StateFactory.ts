@@ -8,6 +8,7 @@ import {StateConsole} from "./States/StateConsole";
 import {StateBios} from "./States/StateBios";
 import {StateSplash} from "./States/StateSplash";
 import {StateKey} from "./States/StateKey";
+import {StatePower} from "./States/StatePower";
 
 export class StateFactory {
 	static createFast(): State[] {
@@ -170,5 +171,14 @@ export class StateFactory {
 			new StateSplash(2000, true),
 			new StateBlank(2200)
 		]
+	}
+
+	static createShutdown() {
+		let reboot: State[] = this.createReboot();
+		let shutdown: State[] = [
+			new StatePower(0)
+		]
+
+		return reboot.concat(shutdown);
 	}
 }

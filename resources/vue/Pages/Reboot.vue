@@ -1,7 +1,8 @@
 <template>
 	<div class="content">
-		<div class="button" v-on:click="cmdReboot">Yes</div>
-		<div class="button" v-on:click="cmdClose">No</div>
+		<div class="button" v-on:click="cmdShutdown">Shutdown</div>
+		<div class="button" v-on:click="cmdReboot">Reboot</div>
+		<div class="button" v-on:click="cmdClose">Cancel</div>
 	</div>
 </template>
 
@@ -11,14 +12,13 @@ import {Component, Emit, Vue} from "vue-property-decorator";
 @Component
 export default class Reboot extends Vue {
 	@Emit()
-	cmdReboot() {
-		this.$emit("reboot");
-	}
+	cmdReboot() {}
 
 	@Emit()
-	cmdClose() {
-		this.$emit("cmdClose");
-	}
+	cmdShutdown() {}
+
+	@Emit()
+	cmdClose() {}
 }
 </script>
 
@@ -28,11 +28,14 @@ export default class Reboot extends Vue {
 	text-align: center
 	justify-content: center
 	align-items: center
+	flex-wrap: wrap
 	height: 100%
 	background-color: grey
+	padding: 8px
+	box-sizing: border-box
 
 .button
-	margin: 10px
+	margin: 0 10px
 	width: 100px
 	height: 20px
 	border: 2px solid white

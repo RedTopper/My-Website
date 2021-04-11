@@ -18,7 +18,7 @@ export default class Console extends Vue {
 	@Prop() grey!: boolean;
 
 	created() {
-		let self: any = this;
+		let self = this;
 		// Blink cursor
 		setInterval(function() {
 			self.off = !self.off;
@@ -26,7 +26,7 @@ export default class Console extends Vue {
 	}
 
 	updated() {
-		let self: any = this;
+		let self = this;
 		// Auto scroll down
 		self.$nextTick(function () {
 			let objDiv = document.getElementById("screen");

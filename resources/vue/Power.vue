@@ -1,14 +1,14 @@
 <template>
 	<div class="screen">
 		<div class="power">
-			<div class="button" v-on:click="power">
+			<div class="button" v-on:click="cmdPower">
 				<IconPower></IconPower>
 			</div>
 			<div class="help">Tap to boot</div>
 			<div class="help-small">or press any key</div>
 		</div>
 
-		<div class="skip" v-on:click="skip">
+		<div class="skip" v-on:click="cmdSkip">
 			<div class="button">
 				<IconSkip></IconSkip>
 			</div>
@@ -20,19 +20,17 @@
 <script lang="ts">
 import IconPower from "./Icons/IconPower.vue";
 import IconSkip from "./Icons/IconSkip.vue";
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Emit, Vue} from "vue-property-decorator";
 
 @Component({
 	components: {IconSkip, IconPower}
 })
 export default class Power extends Vue {
-	power() {
-		this.$emit('power');
-	}
+	@Emit()
+	cmdPower() {}
 
-	skip() {
-		this.$emit('skip');
-	}
+	@Emit()
+	cmdSkip() {}
 }
 </script>
 

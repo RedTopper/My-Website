@@ -18,25 +18,26 @@ export class StateFactory {
 		];
 	}
 
-	static createNormal(): State[] {
-		let con = new ConData();
-		let conPxe = new ConData();
-
-		let desktop: State[] = [
+	static createDesktop(): State[] {
+		return [
 			new StateBlank(200),
 			new StateBlank(1000, "#202020"),
 			new StateResize(1000),
 			new StateBlank(2000, "#202020", "background.jpg"),
 			new StateDesktop(0, "background.jpg"),
 		]
+	}
 
-		let desktopEnter: State[] = [
+	static createDesktopEnter(): State[] {
+		let desktopEnter: State[] =  [
 			new StateSplash(2000, true),
 		]
 
-		// DesktopEnter chains into Desktop
-		desktopEnter = desktopEnter.concat(desktop);
+		return desktopEnter.concat(this.createDesktop())
+	}
 
+	static createKernelConsole(): State[] {
+		let con = new ConData();
 		let console: State[] = [
 			new StateResize(0, "640px", "480px"),
 			new StateModeColor(0, con, false),
@@ -111,29 +112,32 @@ export class StateFactory {
 			new StateConsole(600, con, "Waisting Your Time", Format.ServiceFinishOK),
 		]
 
-		// Console will chain into Desktop
-		console = console.concat(desktop);
+		return console.concat(this.createDesktop());
+	}
 
+	static createPxe(): State[] {
+		let con = new ConData();
 		let pxe: State[] = [
 			new StateBlank(0),
 			new StateResize(0, "640px", "480px"),
-			new StateModeColor(0, conPxe, false),
-			new StateConsole(1000,conPxe, ">>Start PXE over IPv4..", Format.None),
-			new StateConsole(1200,conPxe, "&nbsp;&nbsp;Station IP address is 10.0.0.100", Format.None),
-			new StateConsole(0,   conPxe, "&nbsp;", Format.None),
-			new StateConsole(200, conPxe, "&nbsp;&nbsp;Server IP address is 10.0.0.2", Format.None),
-			new StateConsole(0,   conPxe, "&nbsp;&nbsp;NBP filename is /e64/syslinux.efi", Format.None),
-			new StateConsole(0,   conPxe, "&nbsp;&nbsp;NBP filesize is 196536 Bytes", Format.None),
-			new StateConsole(1000,conPxe, "&nbsp;Downloading NBP file...", Format.None),
-			new StateConsole(0,   conPxe, "&nbsp;", Format.None),
-			new StateConsole(1000,conPxe, "&nbsp;&nbsp;NBP file downloaded successfully.", Format.None),
-			new StateConsole(0,   conPxe, "Getting cached packet", Format.None),
-			new StateConsole(1000,conPxe, "My IP is 10.0.0.100", Format.None),
+			new StateModeColor(0, con, false),
+			new StateConsole(1000,con, ">>Start PXE over IPv4..", Format.None),
+			new StateConsole(1200,con, "&nbsp;&nbsp;Station IP address is 10.0.0.100", Format.None),
+			new StateConsole(0,   con, "&nbsp;", Format.None),
+			new StateConsole(200, con, "&nbsp;&nbsp;Server IP address is 10.0.0.2", Format.None),
+			new StateConsole(0,   con, "&nbsp;&nbsp;NBP filename is /e64/syslinux.efi", Format.None),
+			new StateConsole(0,   con, "&nbsp;&nbsp;NBP filesize is 196536 Bytes", Format.None),
+			new StateConsole(1000,con, "&nbsp;Downloading NBP file...", Format.None),
+			new StateConsole(0,   con, "&nbsp;", Format.None),
+			new StateConsole(1000,con, "&nbsp;&nbsp;NBP file downloaded successfully.", Format.None),
+			new StateConsole(0,   con, "Getting cached packet", Format.None),
+			new StateConsole(1000,con, "My IP is 10.0.0.100", Format.None),
 		]
 
-		// PXE will chain into Console
-		pxe = pxe.concat(console);
+		return pxe.concat(this.createKernelConsole())
+	}
 
+	static createBios(): State[] {
 		return [
 			new StateResize(0, "800px", "600px"),
 			new StateBios(70, 0, "00"),
@@ -151,8 +155,8 @@ export class StateFactory {
 			new StateSplash(800),
 			new StateKey(0, [
 				// Normal boot gets a loading wheel
-				{keypress: "", events: desktopEnter},
-				{keypress: "Shift", events: pxe}
+				{keypress: "", events: this.createDesktopEnter()},
+				{keypress: "Shift", events: this.createPxe()}
 			])
 		]
 	}
@@ -160,8 +164,11 @@ export class StateFactory {
 	static createReboot() {
 		let con = new ConData();
 		return [
+			new StateBlank(300),
+			new StateResize(0, "800px", "600px"),
 			new StateConsole(1000,con, "", Format.None),
 			new StateSplash(2000, true),
+			new StateBlank(2200)
 		]
 	}
 }

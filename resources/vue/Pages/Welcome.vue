@@ -36,6 +36,7 @@
 .content
 	padding: 5px
 	color: app.$window-color-primary
+	user-select: text
 
 .content a
 	text-decoration: none

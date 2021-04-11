@@ -1,6 +1,6 @@
 <template>
 	<div id="screen" v-bind:style="{maxWidth: width, maxHeight: height}">
-		<component @power="power" @skip="skip" @reboot="reboot" v-if="component" v-bind:is="component" v-bind="componentData"></component>
+		<component @cmd-power="cmdPower" @cmd-skip="cmdSkip" @cmd-reboot="cmdReboot" v-if="component" v-bind:is="component" v-bind="componentData"></component>
 	</div>
 </template>
 
@@ -31,29 +31,29 @@ export default class Screen extends Vue {
 		window.addEventListener('keydown', (e) => {
 			self.keypress = e.key;
 			if (self.component == Power) {
-				self.power();
+				self.cmdPower();
 				self.keypress = null;
 			}
 		});
 	}
 
-	power() {
+	cmdPower() {
 		console.log("Let's go!");
 		console.log("Try out the BIOS hotkeys while you're at it!");
-		this.runner.add(StateFactory.createNormal());
+		this.runner.add(StateFactory.createBios());
 		this.runner.start();
 	}
 
-	skip() {
+	cmdSkip() {
 		console.log("Skipping...");
 		this.runner.add(StateFactory.createFast());
 		this.runner.start();
 	}
 
-	reboot() {
+	cmdReboot() {
 		console.log("Goodbye!");
 		this.runner.add(StateFactory.createReboot());
-		this.runner.add(StateFactory.createNormal());
+		this.runner.add(StateFactory.createBios());
 		this.runner.start();
 	}
 
@@ -94,4 +94,5 @@ export default class Screen extends Vue {
 	box-shadow: 8px 8px 8px #000
 	box-sizing: border-box
 	overflow: hidden
+	user-select: none
 </style>

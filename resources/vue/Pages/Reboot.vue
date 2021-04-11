@@ -1,24 +1,41 @@
 <template>
 	<div class="content">
-		<p><span class="accent-green">user@awalter.net</span>:<span class="accent-blue">~</span>$ sudo shutdown -r</p>
-		<p>The system is going down for halt NOW!</p>
+		<div class="button" v-on:click="cmdReboot">Yes</div>
+		<div class="button" v-on:click="cmdClose">No</div>
 	</div>
 </template>
 
+<script lang="ts">
+import {Component, Emit, Vue} from "vue-property-decorator";
+
+@Component
+export default class Reboot extends Vue {
+	@Emit()
+	cmdReboot() {
+		this.$emit("reboot");
+	}
+
+	@Emit()
+	cmdClose() {
+		this.$emit("cmdClose");
+	}
+}
+</script>
+
 <style lang="sass" scoped>
-@use "./resources/sass/app"
-
 .content
-	padding: 5px
-	color: app.$window-color-primary
+	display: flex
+	text-align: center
+	justify-content: center
+	align-items: center
+	height: 100%
+	background-color: grey
 
-.content a
-	text-decoration: none
-	color: app.$window-color-accent-blue
-
-.content p
-	margin: 8px 0 0
-
-.content p:first-child
-	margin: 0
+.button
+	margin: 10px
+	width: 100px
+	height: 20px
+	border: 2px solid white
+	background-color: lightgray
+	color: black
 </style>

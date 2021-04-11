@@ -27,8 +27,6 @@ export class Runner {
 	}
 
 	private run() {
-		console.log(this.screen);
-
 		let current = this.states.shift();
 		if (!current) {
 			this.running = false;

@@ -1,8 +1,8 @@
 <template>
 	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image, min: min}">
-		<div class="window"  v-bind:style="{maxWidth: max ? null : '1024px', maxHeight: max ? null : '768px', display: close ? 'none' : null}">
+		<div class="window"  v-bind:style="{maxWidth: max ? null : width, maxHeight: max ? null : height, display: close ? 'none' : null}">
 			<div class="title">
-				<span class="name">{{ properties.title }}</span>
+				<span class="name">{{ title }}</span>
 				<div class="controls">
 					<div class="min" v-on:click="cmdMin">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
@@ -20,12 +20,12 @@
 				</div>
 			</div>
 			<div class="frame" v-bind:style="{display: min ? 'none' : null}">
-				<component v-bind:is="page"></component>
+				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" v-bind:is="page"></component>
 			</div>
 		</div>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
 		<div class="icons">
-			<div v-for="(launch, index) in icons" :key="index" v-on:click="cmdLaunch(launch.page)">
+			<div v-for="(launch, index) in icons" :key="index" v-on:click="cmdLaunch(launch.page, launch.width, launch.height, launch.title)">
 				<component v-bind:is="launch.icon"></component>
 			</div>
 		</div>
@@ -39,16 +39,13 @@ import Reboot from "./Pages/Reboot.vue";
 import LauncherWelcome from "./Launchers/LauncherWelcome.vue";
 import LauncherReboot from "./Launchers/LauncherReboot.vue";
 import {Component as VueComponent} from "vue";
-import {Component, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 
 interface Launch {
 	icon: VueComponent,
-	page: VueComponent
-}
-
-interface WindowProperties {
-	width: number,
-	height: number,
+	page: VueComponent,
+	width: string,
+	height: string,
 	title: string,
 }
 
@@ -58,17 +55,14 @@ export default class Desktop extends Vue {
 	private max: boolean = false;
 	private close: boolean = true;
 	private page: VueComponent = Blank;
+	private width: string = "640px";
+	private height: string = "480px";
+	private title: string = "Missingno";
 
 	private icons: Launch[] = [
-		{icon: LauncherReboot, page: Reboot},
-		{icon: LauncherWelcome, page: Welcome}
+		{icon: LauncherReboot, page: Reboot, width: "300px", height: "100px", title: "Really Reboot?"},
+		{icon: LauncherWelcome, page: Welcome, width: "1024px", height: "768px", title: "Terminal"}
 	]
-
-	private properties: WindowProperties = {
-		width: 640,
-		height: 480,
-		title: "Missingno",
-	}
 
 	@Prop() color!: string;
 	@Prop() image!: string;
@@ -89,11 +83,17 @@ export default class Desktop extends Vue {
 		this.close = true;
 	}
 
-	cmdLaunch(page: VueComponent) {
-		//self.$emit('reboot');
+	// Re-emit event
+	@Emit()
+	cmdReboot() {}
+
+	cmdLaunch(page: VueComponent, width: string, height: string, title: string) {
 		this.page = page;
 		this.close = false;
 		this.min = false;
+		this.width = width;
+		this.height = height;
+		this.title = title;
 	}
 }
 </script>

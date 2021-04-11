@@ -8,15 +8,6 @@ import {StateConsole} from "./States/StateConsole";
 import {StateBios} from "./States/StateBios";
 import {StateSplash} from "./States/StateSplash";
 import {StateKey} from "./States/StateKey";
-import {Component} from "vue";
-
-export interface Internal {
-	keypress: string | null
-	state: Component | null
-	data: any
-	width: string | null
-	height: string | null
-}
 
 export class StateFactory {
 	static createFast(): State[] {

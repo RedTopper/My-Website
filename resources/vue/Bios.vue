@@ -17,18 +17,21 @@
 </template>
 
 <script lang="ts">
-export default {
-	name: "Bios",
-	props: ["code", "percent", "keypress"],
-	computed: {
-		help: function () {
-			let self: any = this;
-			let text = "Press Enter to enter SETUP, Shift for Network Boot, ESC for Boot Menu";
-			if (self.keypress == "Shift") text = "Starting PXE boot...";
-			if (self.keypress == "Escape") text = "Not yet implemented!";
-			if (self.keypress == "Enter") text = "Not yet implemented!";
-			return text;
-		}
+import {Component, Prop, Vue} from "vue-property-decorator";
+
+@Component
+export default class Bios extends Vue {
+	@Prop() code!: string;
+	@Prop() percent!: string;
+	@Prop() keypress!: string;
+
+	get help(): string {
+		let self: any = this;
+		let text = "Press Enter to enter SETUP, Shift for Network Boot, ESC for Boot Menu";
+		if (self.keypress == "Shift") text = "Starting PXE boot...";
+		if (self.keypress == "Escape") text = "Not yet implemented!";
+		if (self.keypress == "Enter") text = "Not yet implemented!";
+		return text;
 	}
 }
 </script>

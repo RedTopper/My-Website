@@ -8,21 +8,23 @@
 </template>
 
 <script lang="ts">
-export default {
-	name: "Console",
-	props: ["lines", "grey"],
-	data() {
-		return {
-			off: false
-		}
-	},
+import {Component, Prop, Vue} from "vue-property-decorator";
+
+@Component
+export default class Console extends Vue {
+	private off: boolean = false;
+
+	@Prop() lines!: string[];
+	@Prop() grey!: boolean;
+
 	created() {
 		let self: any = this;
 		// Blink cursor
 		setInterval(function() {
 			self.off = !self.off;
 		}.bind(this), 250);
-	},
+	}
+
 	updated() {
 		let self: any = this;
 		// Auto scroll down

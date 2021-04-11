@@ -15,20 +15,20 @@ export class StateKey extends State {
 	}
 
 	data(runner: Runner): any {
-		if (!runner.internal) {
+		if (!runner.getScreen()) {
 			return null
 		}
 
 		for (let i = 0; i < this.choices.length; i++) {
-			if (runner.internal.keypress == this.choices[i].keypress) {
+			if (runner.getScreen().getKeypress() == this.choices[i].keypress) {
 				runner.add(this.choices[i].events);
-				runner.internal.keypress = null;
+				runner.getScreen().resetKeypress();
 				return;
 			}
 		}
 
 		// Run default first
 		runner.add(this.choices[0].events);
-		runner.internal.keypress = null;
+		runner.getScreen().resetKeypress()
 	}
 }

@@ -2,10 +2,13 @@
 	<div class="console" v-bind:style="{backgroundColor: color, backgroundImage: image}" v-bind:class="{fade: !!image}"></div>
 </template>
 
-<script>
-export default {
-	name: "Blank",
-	props: ["color", "image"]
+<script lang="ts">
+import {Component, Prop, Vue} from "vue-property-decorator";
+
+@Component
+export default class Blank extends Vue {
+	@Prop() color!: string;
+	@Prop() image!: string;
 }
 </script>
 

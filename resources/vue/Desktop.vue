@@ -2,7 +2,7 @@
 	<div class="desktop" v-bind:style="{backgroundImage: image}" v-bind:class="{fade: !!image, min: min}">
 		<div class="window"  v-bind:style="{maxWidth: max ? null : '1024px', maxHeight: max ? null : '768px', display: close ? 'none' : null}">
 			<div class="title">
-				<span class="name">Terminal</span>
+				<span class="name">{{ properties.title }}</span>
 				<div class="controls">
 					<div class="min" v-on:click="cmdMin">
 						<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
@@ -33,63 +33,67 @@
 </template>
 
 <script lang="ts">
+import Blank from "./Blank.vue";
 import Welcome from "./Pages/Welcome.vue";
 import Reboot from "./Pages/Reboot.vue";
 import LauncherWelcome from "./Launchers/LauncherWelcome.vue";
 import LauncherReboot from "./Launchers/LauncherReboot.vue";
-import {Component} from "vue";
+import {Component as VueComponent} from "vue";
+import {Component, Prop, Vue} from 'vue-property-decorator'
 
 interface Launch {
-	icon: Component,
-	page: Component
+	icon: VueComponent,
+	page: VueComponent
 }
 
-export default {
-	name: "Desktop",
-	props: ["color", "image"],
-	data() {
-		let icons: Launch[] = [
-			{icon: LauncherReboot, page: Reboot},
-			{icon: LauncherWelcome, page: Welcome}
-		]
+interface WindowProperties {
+	width: number,
+	height: number,
+	title: string,
+}
 
-		return  {
-			max: false,
-			min: false,
-			close: true,
-			page: Welcome,
-			icons: icons
-		}
-	},
-	methods: {
-		cmdMin: function () {
-			let self: any = this;
-			self.min = !self.min;
-		},
-		cmdMax: function () {
-			let self: any = this;
-			if (self.min) {
-				self.min = false;
-			} else {
-				self.max = !self.max;
-			}
-		},
-		cmdClose: function () {
-			let self: any = this;
-			self.close = true;
-		},
-		cmdLaunch: function (page: Component) {
-			let self: any = this;
-			if (page == Reboot) {
-				setTimeout(function () {
-					self.$emit('reboot');
-				}, 1000);
-			}
+@Component
+export default class Desktop extends Vue {
+	private min: boolean = false;
+	private max: boolean = false;
+	private close: boolean = true;
+	private page: VueComponent = Blank;
 
-			self.page = page;
-			self.close = false;
-			self.min = false;
+	private icons: Launch[] = [
+		{icon: LauncherReboot, page: Reboot},
+		{icon: LauncherWelcome, page: Welcome}
+	]
+
+	private properties: WindowProperties = {
+		width: 640,
+		height: 480,
+		title: "Missingno",
+	}
+
+	@Prop() color!: string;
+	@Prop() image!: string;
+
+	cmdMin() {
+		this.min = !this.min;
+	}
+
+	cmdMax() {
+		if (this.min) {
+			this.min = false;
+		} else {
+			this.max = !this.max;
 		}
+	}
+
+	cmdClose() {
+		this.close = true;
+	}
+
+	cmdLaunch(page: VueComponent) {
+		//self.$emit('reboot');
+		this.page = page;
+		this.close = false;
+		this.min = false;
 	}
 }
 </script>
@@ -99,7 +103,7 @@ $window-shadow: 0 0 8px 2px #000
 $window-control-height: 32px
 $window-accents: #2B2B2B
 $window-control-color: #EEE
-$window-background: rgba(0, 43, 54, 0.95)
+$window-background: rgba(0, 43, 54, 0.97)
 
 .icon::v-deep
 	width: 64px

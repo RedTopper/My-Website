@@ -1,14 +1,14 @@
 import {State} from "./States/State";
-import {Internal} from "./StateFactory";
+import Screen from "../vue/Screen.vue";
+import Vue from "vue";
 
 export class Runner {
 	private states: State[] = [];
 	private running: boolean = false;
+	private screen: Screen;
 
-	internal:  Internal;
-
-	constructor(internal: Internal) {
-		this.internal = internal;
+	constructor(screen: Screen) {
+		this.screen = screen;
 	}
 
 	public add(states: State[]) {
@@ -22,7 +22,13 @@ export class Runner {
 		}
 	}
 
+	public getScreen(): Screen {
+		return this.screen;
+	}
+
 	private run() {
+		console.log(this.screen);
+
 		let current = this.states.shift();
 		if (!current) {
 			this.running = false;
@@ -31,12 +37,11 @@ export class Runner {
 
 		let data = current.data(this);
 		if (data) {
-			data.keypress = this.internal.keypress;
-			this.internal.data = data;
+			this.getScreen().setComponentData(data);
 		}
 
 		if (current.comp) {
-			this.internal.state = current.comp;
+			this.getScreen().setComponent(current.comp);
 		}
 
 		setTimeout(this.run.bind(this), current.time);

@@ -17,19 +17,21 @@
 	</div>
 </template>
 
-<script>
-import IconPower from "./Icons/IconPower";
-import IconSkip from "./Icons/IconSkip";
-export default {
-	name: "Power",
-	components: {IconSkip, IconPower},
-	methods: {
-		power: function () {
-			this.$emit('power');
-		},
-		skip: function () {
-			this.$emit('skip');
-		}
+<script lang="ts">
+import IconPower from "./Icons/IconPower.vue";
+import IconSkip from "./Icons/IconSkip.vue";
+import {Component, Vue} from "vue-property-decorator";
+
+@Component({
+	components: {IconSkip, IconPower}
+})
+export default class Power extends Vue {
+	power() {
+		this.$emit('power');
+	}
+
+	skip() {
+		this.$emit('skip');
 	}
 }
 </script>

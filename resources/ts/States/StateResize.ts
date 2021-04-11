@@ -12,9 +12,7 @@ export class StateResize extends State {
 	}
 
 	data(runner: Runner): any {
-		if (runner.internal) {
-			runner.internal.width = this.width;
-			runner.internal.height = this.height;
-		}
+		runner.getScreen().setWidth(this.width);
+		runner.getScreen().setHeight(this.height);
 	}
 }

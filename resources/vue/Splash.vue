@@ -17,9 +17,11 @@
 </template>
 
 <script lang="ts">
-export default {
-	name: "Splash",
-	props: ["load"]
+import {Component, Prop, Vue} from "vue-property-decorator";
+
+@Component
+export default class Splash extends Vue {
+	@Prop() load!: boolean;
 }
 </script>
 

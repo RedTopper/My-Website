@@ -1,12 +1,13 @@
 <template>
 	<div id="screen" v-bind:style="{maxWidth: width, maxHeight: height}">
-		<component @power="power" @skip="skip" v-if="state" v-bind:is="state" v-bind="data"></component>
+		<component @power="power" @skip="skip" @reboot="reboot" v-if="state" v-bind:is="state" v-bind="data"></component>
 	</div>
 </template>
 
 <script lang="ts">
 import Power from "./Power.vue";
-import {Internal, RunnerFactory} from "../ts/RunnerFactory";
+import {Internal, StateFactory} from "../ts/StateFactory";
+import {Runner} from "../ts/Runner";
 
 let internal: Internal = {
 	keypress: null,
@@ -15,6 +16,8 @@ let internal: Internal = {
 	width: "800px",
 	height: "600px",
 }
+
+let runner: Runner = new Runner(internal);
 
 export default {
 	name: "Screen",
@@ -34,11 +37,20 @@ export default {
 	methods: {
 		power() {
 			console.log("Let's go!");
-			RunnerFactory.createNormal(internal).start();
+			console.log("Try out the BIOS hotkeys while you're at it!");
+			runner.add(StateFactory.createNormal());
+			runner.start();
 		},
 		skip() {
-			console.log("rip");
-			RunnerFactory.createFast(internal).start();
+			console.log("Skipping...");
+			runner.add(StateFactory.createFast());
+			runner.start();
+		},
+		reboot() {
+			console.log("Goodbye!");
+			runner.add(StateFactory.createReboot());
+			runner.add(StateFactory.createNormal());
+			runner.start();
 		}
 	}
 }

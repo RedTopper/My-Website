@@ -1,5 +1,5 @@
 import {State} from "./States/State";
-import {Internal} from "./RunnerFactory";
+import {Internal} from "./StateFactory";
 
 export class Runner {
 	private states: State[] = [];

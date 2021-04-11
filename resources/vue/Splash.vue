@@ -1,7 +1,6 @@
 <template>
 	<div class="splash">
 		<img class="logo" src="/img/splash.png" alt="splash">
-
 		<div class="load" v-bind:style="{display: load ? null : 'none'}">
 			<svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="background-color: black;">
 				<g fill="none" fill-rule="evenodd">

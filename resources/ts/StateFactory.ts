@@ -1,4 +1,3 @@
-import {Runner} from "./Runner";
 import {State} from "./States/State";
 import {StateBlank} from "./States/StateBlank";
 import {StateResize} from "./States/StateResize";
@@ -19,22 +18,16 @@ export interface Internal {
 	height: string | null
 }
 
-export class RunnerFactory {
-	static createFast(internal: Internal): Runner {
-		let runner = new Runner(internal);
-
-		let desktop: State[] = [
+export class StateFactory {
+	static createFast(): State[] {
+		return [
 			new StateResize(0),
 			new StateBlank(750, "#000", "background.jpg"),
 			new StateDesktop(100, "background.jpg"),
 		];
-
-		runner.add(desktop);
-		return runner;
 	}
 
-	static createNormal(internal: Internal): Runner {
-		let runner = new Runner(internal);
+	static createNormal(): State[] {
 		let con = new ConData();
 		let conPxe = new ConData();
 
@@ -144,13 +137,14 @@ export class RunnerFactory {
 			new StateConsole(0,   conPxe, "&nbsp;", Format.None),
 			new StateConsole(1000,conPxe, "&nbsp;&nbsp;NBP file downloaded successfully.", Format.None),
 			new StateConsole(0,   conPxe, "Getting cached packet", Format.None),
-			new StateConsole(1000,   conPxe, "My IP is 10.0.0.100", Format.None),
+			new StateConsole(1000,conPxe, "My IP is 10.0.0.100", Format.None),
 		]
 
 		// PXE will chain into Console
 		pxe = pxe.concat(console);
 
-		let bios: State[] = [
+		return [
+			new StateResize(0, "800px", "600px"),
 			new StateBios(70, 0, "00"),
 			new StateBios(60, 2, "01"),
 			new StateBios(400, 5, "06"),
@@ -170,8 +164,13 @@ export class RunnerFactory {
 				{keypress: "Shift", events: pxe}
 			])
 		]
+	}
 
-		runner.add(bios);
-		return runner;
+	static createReboot() {
+		let con = new ConData();
+		return [
+			new StateConsole(1000,con, "", Format.None),
+			new StateSplash(2000, true),
+		]
 	}
 }

@@ -30,12 +30,6 @@
 	</div>
 </template>
 
-<script lang="ts">
-export default {
-	name: "Welcome"
-}
-</script>
-
 <style lang="sass" scoped>
 @use "./resources/sass/app"
 

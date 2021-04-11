@@ -15,4 +15,4 @@ My website. There isn't much here yet.
 1. Bam, you're in
 
 ## Screenshot
-![Website Preview](./media/Screenshot 2021-04-11 024419.png "Website 'Desktop' featuring reboot and a welcome 'terminal'")
+![Website Preview](./media/Screenshot-2021-04-11-024419.png "Website 'Desktop' featuring reboot and a welcome 'terminal'")

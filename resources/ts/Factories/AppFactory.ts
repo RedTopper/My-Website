@@ -3,7 +3,7 @@ import {IApp} from "@ts/App/IApp";
 import Something from "@vue/Pages/Something.vue";
 import Reboot from "@vue/Pages/Reboot.vue";
 import Welcome from "@vue/Pages/Welcome.vue";
-import Projects from "@vue/Pages/Projects.vue";
+import Folder from "@vue/Pages/Folder.vue";
 import IconReboot from "@vue/Icons/IconReboot.vue";
 import IconWelcome from "@vue/Icons/IconWelcome.vue";
 import IconProjects from "@vue/Icons/IconProjects.vue";
@@ -20,17 +20,7 @@ export class AppFactory {
 				width: 800,
 				height: 600,
 				maximizable: true,
-			},
-			{
-				app: Something,
-				title: "A Template",
-				label: "Template",
-				hover: "Something",
-				icon: "/img/projects/super.png",
-				width: 800,
-				height: 600,
-				maximizable: true,
-			},
+			}
 		]
 	}
 
@@ -58,13 +48,13 @@ export class AppFactory {
 				maximizable: true,
 			},
 			{
-				app: Projects,
+				app: Folder,
 				title: "Personal Projects",
 				label: "Projects",
 				hover: "Personal Projects Folder",
 				icon: IconProjects,
 				background: "#202020",
-				width: 800,
+				width: 822,
 				height: 600,
 				maximizable: true,
 				componentData: {

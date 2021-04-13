@@ -1,10 +1,10 @@
 <template>
 	<div class="content">
 		<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app)">
-			<div class="app">
+			<div class="app" :title="app.hover">
 				<img class="icon" :src="app.icon" :alt="app.label"/>
-				<div class="title">{{ app.title }}</div>
-				<div class="description">{{ app.label }}</div>
+				<div class="label">{{ app.label }}</div>
+				<div class="hover">{{ app.hover }}</div>
 			</div>
 		</div>
 	</div>

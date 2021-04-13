@@ -4,9 +4,9 @@ import Something from "@vue/Pages/Something.vue";
 import Reboot from "@vue/Pages/Reboot.vue";
 import Welcome from "@vue/Pages/Welcome.vue";
 import Projects from "@vue/Pages/Projects.vue";
-import LauncherReboot from "@vue/Launchers/LauncherReboot.vue";
-import LauncherWelcome from "@vue/Launchers/LauncherWelcome.vue";
-import LauncherProjects from "@vue/Launchers/LauncherProjects.vue";
+import IconReboot from "@vue/Icons/IconReboot.vue";
+import IconWelcome from "@vue/Icons/IconWelcome.vue";
+import IconProjects from "@vue/Icons/IconProjects.vue";
 
 export class AppFactory {
 	static createProjects(): IApp[] {
@@ -41,7 +41,7 @@ export class AppFactory {
 				title: "Power Options",
 				label: "Power",
 				hover: "Reboot or Shutdown This PC",
-				icon: LauncherReboot,
+				icon: IconReboot,
 				background: "grey",
 				width: 280,
 				height: 136,
@@ -52,7 +52,7 @@ export class AppFactory {
 				title: "Terminal",
 				label: "Welcome",
 				hover: "Welcome to awalter.net",
-				icon: LauncherWelcome,
+				icon: IconWelcome,
 				width: 775,
 				height: 485,
 				maximizable: true,
@@ -62,7 +62,7 @@ export class AppFactory {
 				title: "Personal Projects",
 				label: "Projects",
 				hover: "Personal Projects Folder",
-				icon: LauncherProjects,
+				icon: IconProjects,
 				background: "#202020",
 				width: 800,
 				height: 600,

@@ -1,5 +1,6 @@
-import Boot from "../../vue/Bios.vue";
-import {State} from "./State";
+import {State} from "@ts/States/State";
+
+import Boot from "@vue/Bios.vue";
 
 export class StateBios extends State {
 	percent: number;

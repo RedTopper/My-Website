@@ -1,5 +1,6 @@
-import Window from "../../vue/Desktop.vue";
-import {State} from "./State";
+import {State} from "@ts/States/State";
+
+import Window from "@vue/Desktop.vue";
 
 export class StateDesktop extends State {
 	image?: string;

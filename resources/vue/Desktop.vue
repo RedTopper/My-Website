@@ -19,45 +19,29 @@
 					</div>
 				</div>
 			</div>
-			<div class="frame" v-bind:style="{display: min ? 'none' : null}">
-				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" v-bind:is="app.app"/>
+			<div class="frame" v-bind:style="{display: min ? 'none' : null, background: app.background}">
+				<component @cmd-close="cmdClose" @cmd-reboot="cmdReboot" @cmd-shutdown="cmdShutdown" @cmd-launch="cmdLaunch($event)" v-bind:is="app.app" v-bind="app.componentData"/>
 			</div>
 		</div>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
 		<div class="icons">
-			<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app)">
-				<component v-bind:is="app.icon"></component>
+			<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app)" :title="app.label">
+				<div class="app">
+					<component class="icon" v-bind:is="app.icon"></component>
+					<div class="description">{{ app.label }}</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import LauncherWelcome from "./Launchers/LauncherWelcome.vue";
-import LauncherReboot from "./Launchers/LauncherReboot.vue";
-import Welcome from "./Pages/Welcome.vue";
-import Reboot from "./Pages/Reboot.vue";
-import {IApp} from "../ts/App/IApp"
 import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 
-let apps: IApp[] = [
-	{
-		width: 280,
-		height: 136,
-		title: "Power Options",
-		maximizable: false,
-		icon: LauncherReboot,
-		app: Reboot
-	},
-	{
-		width: 775,
-		height: 485,
-		title: "Terminal",
-		maximizable: true,
-		icon: LauncherWelcome,
-		app: Welcome
-	}
-]
+import {IApp} from "@ts/App/IApp"
+import {AppFactory} from "@ts/Factories/AppFactory";
+
+let apps = AppFactory.createApps();
 
 @Component
 export default class Desktop extends Vue {
@@ -74,7 +58,7 @@ export default class Desktop extends Vue {
 		let self = this;
 		setTimeout(function () {
 			self.cmdLaunch(apps[1]);
-		}, 800)
+		}, 200)
 	}
 
 	cmdMin() {
@@ -121,14 +105,6 @@ $window-accents: #2B2B2B
 $window-control-color: #EEE
 $window-background: rgba(0, 43, 54, 0.97)
 
-.icon::v-deep
-	width: 64px
-	stroke: white
-	fill: white !important
-	color: white
-	text-align: center
-	margin: 8px 16px
-
 .desktop
 	height: 100%
 	background-position: center
@@ -156,6 +132,22 @@ $window-background: rgba(0, 43, 54, 0.97)
 	display: flex
 	flex-direction: column
 	flex-wrap: wrap
+	align-items: center
+
+.app
+	color: white
+	margin: 8px
+	text-align: center
+
+.app .icon
+	width: 64px
+	stroke: white
+	fill: white !important
+	display: block
+	margin: 0 auto
+
+.app .description
+	margin-top: 4px
 
 .window
 	width: 100%

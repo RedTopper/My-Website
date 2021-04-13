@@ -5,6 +5,11 @@
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": "./resources",
+    "paths": {
+      "@ts/*": ["ts/*"],
+      "@vue/*": ["vue/*"]
+    }
   }
 }

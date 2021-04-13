@@ -1,15 +1,15 @@
 <template>
 	<div class="screen">
 		<div class="power">
-			<div class="button" v-on:click="cmdPower" tabindex="0">
+			<div class="button" v-on:click="cmdPower">
 				<IconPower></IconPower>
 			</div>
 			<div class="help">Tap to boot</div>
 			<div class="help-small">or press any key</div>
 		</div>
 
-		<div class="skip" v-on:click="cmdSkip" tabindex="0">
-			<div class="button">
+		<div class="skip">
+			<div class="button" v-on:click="cmdSkip">
 				<IconSkip></IconSkip>
 			</div>
 			<div class="help-small">or skip...</div>
@@ -18,9 +18,10 @@
 </template>
 
 <script lang="ts">
-import IconPower from "./Icons/IconPower.vue";
-import IconSkip from "./Icons/IconSkip.vue";
 import {Component, Emit, Vue} from "vue-property-decorator";
+
+import IconPower from "@vue/Icons/IconPower.vue";
+import IconSkip from "@vue/Icons/IconSkip.vue";
 
 @Component({
 	components: {IconSkip, IconPower}
@@ -55,13 +56,12 @@ export default class Power extends Vue {
 
 .skip svg
 	width: 32px
-	margin-bottom: 5px
 
 .button
 	stroke: grey
 	fill: grey
 
-.button svg:hover
+.button:hover
 	stroke: white
 	fill: white
 

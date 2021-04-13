@@ -1,5 +1,5 @@
-import {State} from "../States/State";
-import {IScreen} from "./IScreen";
+import {State} from "@ts/States/State";
+import {IScreen} from "@ts/App/IScreen";
 
 export class Runner {
 	private states: State[] = [];

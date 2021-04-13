@@ -1,5 +1,6 @@
-import Blank from "../../vue/Blank.vue";
-import {State} from "./State";
+import {State} from "@ts/States/State";
+
+import Blank from "@vue/Blank.vue";
 
 export class StateBlank extends State {
 	color: string;

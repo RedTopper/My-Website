@@ -1,10 +1,14 @@
 import {Component} from "vue";
 
 export interface IApp {
-	icon: Component,
+	icon: Component | string,
 	app: Component,
 	width: number,
 	height: number,
-	title: string,
 	maximizable: boolean
+	title: string,
+	label: string,
+	hover: string,
+	componentData?: any
+	background?: string;
 }

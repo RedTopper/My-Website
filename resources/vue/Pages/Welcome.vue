@@ -25,15 +25,6 @@
 	</div>
 </template>
 
-<script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-
-@Component
-export default class Welcome extends Vue {
-
-}
-</script>
-
 <style lang="sass" scoped>
 @use "./resources/sass/app"
 

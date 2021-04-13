@@ -1,5 +1,6 @@
-import Splash from "../../vue/Splash.vue";
-import {State} from "./State";
+import {State} from "@ts/States/State";
+
+import Splash from "@vue/Splash.vue";
 
 export class StateSplash extends State {
 	load: boolean

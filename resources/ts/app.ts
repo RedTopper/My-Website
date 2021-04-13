@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import Screen from '../vue/Screen.vue'
+
+import Screen from '@vue/Screen.vue'
 
 new Vue({
 	el: '#app',

@@ -7,9 +7,7 @@
 </template>
 
 <script lang="ts">
-import LauncherReboot from "../Launchers/LauncherReboot.vue";
 import {Component, Emit, Vue} from "vue-property-decorator";
-import {IApp} from "../../ts/App/IApp";
 
 @Component
 export default class Reboot extends Vue {
@@ -32,7 +30,6 @@ export default class Reboot extends Vue {
 	align-items: center
 	flex-wrap: wrap
 	height: 100%
-	background-color: grey
 	padding: 8px
 	box-sizing: border-box
 

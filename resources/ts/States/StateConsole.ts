@@ -1,6 +1,7 @@
-import Console from "../../vue/Console.vue";
-import {State} from "./State";
-import {ConData, Format} from "../App/ConData";
+import {State} from "@ts/States/State";
+import {ConData, Format} from "@ts/App/ConData";
+
+import Console from "@vue/Console.vue";
 
 export class StateConsole extends State {
 	con: ConData;

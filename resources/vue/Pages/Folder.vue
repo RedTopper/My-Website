@@ -6,7 +6,7 @@
 			<div class="hover">{{ app.hover }}</div>
 		</div>
 		<!-- Generate a whole bunch of fake elements so icons always align left -->
-		<div class="app fake" v-for="(app, index) in Array(15)" :key="index"></div>
+		<div class="app fake" v-for="(k, v) in Array(15)" :key="'A'+ v"></div>
 	</div>
 </template>
 

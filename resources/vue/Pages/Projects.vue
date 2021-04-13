@@ -39,14 +39,24 @@ export default class Projects extends Vue {
 	margin: 8px
 	text-align: center
 
+
 .app .icon
-	width: 64px
+	width: 180px
 	stroke: white
 	fill: white !important
 	display: block
 	margin: 0 auto
+	box-shadow: 0 0 4px black
+	border-radius: 8px
 
-.app .title
+.app .label
 	margin-top: 4px
+	text-shadow: 0 0 4px black, 0 0 4px black
+
+.app .hover
+	margin-top: 4px
+	font-size: 13px
+	color: grey
+	text-shadow: 0 0 4px black
 
 </style>

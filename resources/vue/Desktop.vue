@@ -5,11 +5,12 @@
 			@cmd-reboot="cmdReboot"
 			@cmd-shutdown="cmdShutdown"
 			@cmd-min="cmdMin($event)"
-			@cmd-launch="cmdLaunch($event)"
+			@cmd-launch="cmdLaunch($event, false)"
+			ref="window"
 			v-if="!!app" v-bind="{app: app}"/>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
 		<div class="icons">
-			<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app)" :title="app.hover">
+			<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app, true)" :title="app.hover">
 				<div class="app">
 					<component class="icon" v-bind:is="app.icon"></component>
 					<div class="label">{{ app.label }}</div>
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
+import {Component, Emit, Prop, Ref, Vue} from 'vue-property-decorator'
 
 import {IApp} from "@ts/App/IApp"
 import {AppFactory} from "@ts/Factories/AppFactory";
@@ -37,11 +38,12 @@ export default class Desktop extends Vue {
 
 	@Prop() color!: string;
 	@Prop() image!: string;
+	@Ref() readonly window!: Window
 
 	mounted() {
 		let self = this;
 		setTimeout(function () {
-			self.cmdLaunch(self.apps[1]);
+			self.cmdLaunch(self.apps[1], true);
 		}, 200)
 	}
 
@@ -51,7 +53,7 @@ export default class Desktop extends Vue {
 
 	cmdClose() {
 		if (this.appLast?.componentData) {
-			this.cmdLaunch(this.appLast);
+			this.cmdLaunch(this.appLast, true);
 		} else {
 			this.app = null;
 		}
@@ -59,10 +61,22 @@ export default class Desktop extends Vue {
 		this.appLast = null;
 	}
 
-	cmdLaunch(app: IApp) {
-		this.min = false;
+	cmdLaunch(app: IApp, isLaunchedFromDesktop: boolean) {
 		this.appLast = this.app;
+		if (isLaunchedFromDesktop) {
+			// If we launch from the desktop clear the last app so
+			// the explorer window doesn't re-open
+			this.appLast = null;
+		}
+
+		this.min = false;
 		this.app = app;
+
+		// Tell window we're opening up
+		let self = this;
+		this.$nextTick(function () {
+			self.window.onOpen();
+		});
 	}
 
 	// Pass shutdown and reboot events to Screen

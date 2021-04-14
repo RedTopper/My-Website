@@ -1,66 +1,67 @@
-import {IApp} from "@ts/App/IApp";
+import {App} from "@ts/App/App";
 
-import Something from "@vue/Pages/Something.vue";
-import Reboot from "@vue/Pages/Reboot.vue";
-import Welcome from "@vue/Pages/Welcome.vue";
-import Folder from "@vue/Pages/Folder.vue";
+import SuperHaxagon from "@vue/Projects/SuperHaxagon.vue";
+import Reboot from "@vue/Apps/Reboot.vue";
+import Welcome from "@vue/Apps/Welcome.vue";
+import Folder from "@vue/Apps/Folder.vue";
 import IconReboot from "@vue/Icons/IconReboot.vue";
 import IconWelcome from "@vue/Icons/IconWelcome.vue";
 import IconProjects from "@vue/Icons/IconProjects.vue";
 
 export class AppFactory {
-	static createProjects(): IApp[] {
+	static createProjects(): App[] {
 		return [
-			{
-				app: Something,
-				title: "Project: Super Haxagon",
-				label: "Super Haxagon",
-				hover: "A Super Hexagon Clone",
-				icon: "/img/projects/super.png",
-				width: 800,
-				height: 600,
-				maximizable: true,
-			}
+			new App(
+				SuperHaxagon,
+				"Project: Super Haxagon",
+				"super-haxagon.md",
+				"A Super Hexagon Clone",
+				"/img/projects/super.png",
+				1024,
+				768,
+				true,
+				"#0d1117"
+			)
 		]
 	}
 
-	static createApps(): IApp[] {
+	static createApps(): App[] {
 		return [
-			{
-				app: Reboot,
-				title: "Power Options",
-				label: "Power",
-				hover: "Reboot or Shutdown This PC",
-				icon: IconReboot,
-				background: "grey",
-				width: 280,
-				height: 136,
-				maximizable: false,
-			},
-			{
-				app: Welcome,
-				title: "Terminal",
-				label: "Welcome",
-				hover: "Welcome to awalter.net",
-				icon: IconWelcome,
-				width: 775,
-				height: 485,
-				maximizable: true,
-			},
-			{
-				app: Folder,
-				title: "Personal Projects",
-				label: "Projects",
-				hover: "Personal Projects Folder",
-				icon: IconProjects,
-				background: "#202020",
-				width: 822,
-				height: 600,
-				maximizable: true,
-				componentData: {
+			new App(
+				Reboot,
+				"Power Options",
+				"Power",
+				"Reboot or Shutdown This PC",
+				IconReboot,
+				280,
+				136,
+				false,
+				"grey",
+			),
+			new App(
+				Welcome,
+				"Terminal",
+				"Welcome",
+				"Welcome to awalter.net",
+				IconWelcome,
+				775,
+				485,
+				true,
+			),
+			new App(
+				Folder,
+				"Personal Projects",
+				"Projects",
+				"Personal Projects Folder",
+				IconProjects,
+				822,
+				600,
+				true,
+				"#202020",
+				{
 					apps: this.createProjects()
 				}
-			}
+			)
 		]
 	}
 }

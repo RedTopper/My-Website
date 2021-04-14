@@ -42,4 +42,5 @@ export default class Reboot extends Vue {
 	color: black
 	box-shadow: 0 0 3px 1px
 	padding: 3px
+	border-radius: 2px
 </style>

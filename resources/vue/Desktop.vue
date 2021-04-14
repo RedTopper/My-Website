@@ -23,7 +23,7 @@
 <script lang="ts">
 import {Component, Emit, Prop, Ref, Vue} from 'vue-property-decorator'
 
-import {IApp} from "@ts/App/IApp"
+import {App} from "@ts/App/App"
 import {AppFactory} from "@ts/Factories/AppFactory";
 import Window from "@vue/Window.vue";
 
@@ -32,9 +32,9 @@ import Window from "@vue/Window.vue";
 })
 export default class Desktop extends Vue {
 	private min: boolean = false;
-	private app: IApp | null = null;
-	private appLast: IApp | null = null;
-	private apps: IApp[] = AppFactory.createApps();
+	private app: App | null = null;
+	private appLast: App | null = null;
+	private apps: App[] = AppFactory.createApps();
 
 	@Prop() color!: string;
 	@Prop() image!: string;
@@ -61,7 +61,7 @@ export default class Desktop extends Vue {
 		this.appLast = null;
 	}
 
-	cmdLaunch(app: IApp, isLaunchedFromDesktop: boolean) {
+	cmdLaunch(app: App, isLaunchedFromDesktop: boolean) {
 		this.appLast = this.app;
 		if (isLaunchedFromDesktop) {
 			// If we launch from the desktop clear the last app so

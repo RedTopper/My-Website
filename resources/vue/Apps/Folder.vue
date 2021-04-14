@@ -13,14 +13,14 @@
 <script lang="ts">
 import {Component, Emit, Prop, Vue} from "vue-property-decorator";
 
-import {IApp} from "@ts/App/IApp";
+import {App} from "@ts/App/App";
 
 @Component
 export default class Folder extends Vue {
-	@Prop() apps!: IApp[];
+	@Prop() apps!: App[];
 
 	@Emit()
-	cmdLaunch(app: IApp) {
+	cmdLaunch(app: App) {
 		return app;
 	}
 }

@@ -30,16 +30,16 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 
-import {IApp} from "@ts/App/IApp"
+import {App} from "@ts/App/App"
 
 @Component
 export default class Window extends Vue {
 	private min: boolean = false;
 	private max: boolean = false;
 
-	@Prop() app!: IApp;
+	@Prop() app!: App;
 
 	onOpen() {
 		if (!this.app.maximizable) {
@@ -75,7 +75,7 @@ export default class Window extends Vue {
 	@Emit()
 	cmdShutdown() {}
 	@Emit()
-	cmdLaunch(app: IApp) {
+	cmdLaunch(app: App) {
 		return app;
 	}
 }

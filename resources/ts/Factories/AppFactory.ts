@@ -7,6 +7,7 @@ import HiddenPerspective from "@vue/Projects/HiddenPerspective.vue";
 import Reboot from "@vue/Apps/Reboot.vue";
 import Welcome from "@vue/Apps/Welcome.vue";
 import Folder from "@vue/Apps/Folder.vue";
+import Construction from "@vue/Apps/Construction.vue";
 import IconReboot from "@vue/Icons/IconReboot.vue";
 import IconWelcome from "@vue/Icons/IconWelcome.vue";
 import IconProjects from "@vue/Icons/IconProjects.vue";
@@ -57,6 +58,17 @@ export class AppFactory {
 				768,
 				true,
 				"#0d1117"
+			),
+			new App(
+				Construction,
+				"More to come!",
+				"More to come!",
+				"Under Construction",
+				"/img/construction.png",
+				600,
+				0,
+				false,
+				"rgba(0,0,0,0.95)"
 			)
 		]
 	}

@@ -1,5 +1,5 @@
 <template>
-	<div class="window" v-bind:style="{maxWidth: max ? null : app.width+'px', maxHeight: max ? null : app.height+'px'}" v-bind:class="{min: min}">
+	<div class="window" v-bind:style="style" v-bind:class="{min: min}">
 		<div class="title">
 			<span class="name">{{ app.title }}</span>
 			<div class="controls">
@@ -34,12 +34,33 @@ import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 
 import {App} from "@ts/App/App"
 
+interface Style {
+	maxWidth: null | string;
+	maxHeight: null | string;
+	height: null | string;
+}
+
 @Component
 export default class Window extends Vue {
 	private min: boolean = false;
 	private max: boolean = false;
 
 	@Prop() app!: App;
+
+	get style(): any {
+		let style = {} as Style;
+
+		if (!this.max) {
+			style.maxWidth = this.app.width + "px";
+			if (this.app.height == 0) {
+				style.height = "auto";
+			} else {
+				style.maxHeight = this.app.height + "px";
+			}
+		}
+
+		return style;
+	}
 
 	onOpen() {
 		if (!this.app.maximizable) {

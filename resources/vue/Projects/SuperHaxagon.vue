@@ -1,14 +1,16 @@
 <template>
-	<div class="content">
+	<div class="content project">
 		<a href="https://github.com/RedTopper/Super-Haxagon" class="site" title="Open at GitHub.com">
 			<IconGithubCorner/>
 		</a>
 		<div class="markdown">
-			<img class="banner" src="/img/projects/banner.png" alt="Super Haxagon Banner">
-			<h1><img class="icon" src="/img/projects/icon.png" alt="Icon" title="Icon" >Super Haxagon <small>(2013-present)</small></h1>
+			<img class="banner" src="/img/super-haxagon/banner.png" alt="Super Haxagon Banner">
+			<h1><img class="icon" src="/img/super-haxagon/icon.png" alt="Icon" title="Icon" >Super Haxagon <small>(2013-present)</small></h1>
 			<div class="topics">
 				<span class="tag lang">C++</span>
 				<span class="tag lang">C</span>
+				<span class="tag frame">OpenGL</span>
+				<span class="tag frame">SFML</span>
 				<span class="tag plat">Windows</span>
 				<span class="tag plat">Linux</span>
 				<span class="tag plat">Nintendo 3DS</span>
@@ -48,36 +50,17 @@
 				<li>OGG decoder for BGM</li>
 				<li>High Score Saving</li>
 			</ul>
+
+			<h2>Screenshot</h2>
+			<img src="img/super-haxagon/screenshot.png" alt="Super Haxagon Screenshot" title="Screenshot on Windows">
 		</div>
 	</div>
 </template>
 
-<style lang="sass" scoped>
-.site
-	position: absolute
-	top: 0
-	right: 0
-	display: block
+<script lang="ts">
+import IconGithubCorner from "@vue/Icons/IconGithubCorner.vue";
+import {Component, Vue} from 'vue-property-decorator'
 
-.content
-	padding: 15px
-	user-select: text
-
-.banner
-	margin: auto
-	max-width: 100%
-	width: 300px
-	display: block
-
-.icon
-	max-width: 100%
-	display: inline-block
-	margin-right: 16px
-
-</style>
-<script>
-import IconGithubCorner from "@vue/Icons/IconGithubCorner";
-export default {
-	components: {IconGithubCorner}
-}
+@Component({components: {IconGithubCorner}})
+export default class SuperHaxagon extends Vue {}
 </script>

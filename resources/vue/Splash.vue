@@ -26,7 +26,7 @@ export default class Splash extends Vue {
 </script>
 
 <style lang="sass" scoped>
-@use "./resources/sass/app"
+@use "./resources/sass/vars"
 
 .splash
 	color: white
@@ -36,7 +36,7 @@ export default class Splash extends Vue {
 
 .logo
 	position: absolute
-	top: app.$bios-margins
+	top: vars.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 	display: block
@@ -45,7 +45,7 @@ export default class Splash extends Vue {
 
 .load
 	position: absolute
-	bottom: app.$bios-margins
+	bottom: vars.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 

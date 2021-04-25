@@ -37,7 +37,7 @@ export default class Bios extends Vue {
 </script>
 
 <style lang="sass" scoped>
-@use "./resources/sass/app"
+@use "./resources/sass/vars"
 
 .bios
 	color: white
@@ -47,7 +47,7 @@ export default class Bios extends Vue {
 
 .splash
 	position: absolute
-	top: app.$bios-margins
+	top: vars.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 	display: block
@@ -75,7 +75,7 @@ export default class Bios extends Vue {
 
 .bottom
 	position: absolute
-	bottom: app.$bios-margins
+	bottom: vars.$bios-margins
 	left: 50%
 	transform: translate(-50%, 0)
 	width: 100%

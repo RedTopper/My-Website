@@ -1,6 +1,8 @@
 import {App} from "@ts/App/App";
 
 import SuperHaxagon from "@vue/Projects/SuperHaxagon.vue";
+import MyWebsite from "@vue/Projects/MyWebsite.vue";
+import ClickNET from "@vue/Projects/ClickNET.vue";
 import Reboot from "@vue/Apps/Reboot.vue";
 import Welcome from "@vue/Apps/Welcome.vue";
 import Folder from "@vue/Apps/Folder.vue";
@@ -16,7 +18,29 @@ export class AppFactory {
 				"Project: Super Haxagon",
 				"super-haxagon.md",
 				"A Super Hexagon Clone",
-				"/img/projects/super.png",
+				"/img/super-haxagon/thumb.png",
+				1024,
+				768,
+				true,
+				"#0d1117"
+			),
+			new App(
+				MyWebsite,
+				"Project: My Website",
+				"my-website.md",
+				"You're here right now!",
+				"/img/my-website/thumb.png",
+				1024,
+				768,
+				true,
+				"#0d1117"
+			),
+			new App(
+				ClickNET,
+				"Project: Click.NET",
+				"click-net.md",
+				"Multiplayer clicker game",
+				"/img/click-net/thumb.png",
 				1024,
 				768,
 				true,

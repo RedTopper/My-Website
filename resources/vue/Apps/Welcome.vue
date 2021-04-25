@@ -26,16 +26,16 @@
 </template>
 
 <style lang="sass" scoped>
-@use "./resources/sass/app"
+@use "./resources/sass/vars"
 
 .content
 	padding: 5px
-	color: app.$solarized-primary
+	color: vars.$solarized-primary
 	user-select: text
 
 .content a
 	text-decoration: none
-	color: app.$solarized-blue
+	color: vars.$solarized-blue
 
 .content p
 	margin: 0

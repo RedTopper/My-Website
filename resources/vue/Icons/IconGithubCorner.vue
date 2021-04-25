@@ -7,16 +7,16 @@
 </template>
 
 <style lang="sass" scoped>
-@use "./resources/sass/app"
+@use "./resources/sass/vars"
 
 .gh
 	position: absolute
 	top: 0
 	right: 0
-	fill: app.$markdown-primary
+	fill: vars.$markdown-primary
 
 .gh .arm, .gh .body
-	fill: app.$markdown-background
+	fill: vars.$markdown-background
 
 .gh:hover .arm
 	animation: wave 560ms ease-in-out

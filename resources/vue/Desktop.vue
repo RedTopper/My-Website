@@ -10,7 +10,7 @@
 			v-if="!!app" v-bind="{app: app}"/>
 		<img class="logo" src="/img/logo.png" alt="Aaron Walter Logo"/>
 		<div class="icons">
-			<div v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app, true)" :title="app.hover">
+			<div v-for="(app, index) in apps" :key="index" @click="cmdLaunch(app, true)" :title="app.hover" tabindex=0 role="button">
 				<div class="app">
 					<component class="icon" v-bind:is="app.icon"></component>
 					<div class="label">{{ app.label }}</div>

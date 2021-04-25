@@ -1,4 +1,7 @@
-$bios-margins: 90px
+@use "vars"
+@use "colors"
+@use "markdown"
+@use "project"
 
 @font-face
 	font-family: 'Cascadia Code'
@@ -23,86 +26,8 @@ a:hover
 	padding: 20px
 	box-sizing: border-box
 
-$markdown-primary: #c9d1d9
-$markdown-secondary: #9ca2a8
-$markdown-background: #0d1117
-.markdown
-	font-family: Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
-	color: $markdown-primary
-	font-size: 16px
-	line-height: 1.5
-	max-width: 800px
-	margin: auto
 
-.markdown small
-	color: $markdown-secondary
 
-.markdown h1, .markdown h2, .markdown h3
-	margin-top: 24px
-	margin-bottom: 16px
-	font-weight: 600
-	line-height: 1.25
 
-.markdown h1, .markdown h2
-	border-bottom: 1px solid #21262d
-	padding-bottom: .3em
 
-.markdown h1
-	font-size: 2em
 
-.markdown h2
-	font-size: 1.5em
-
-.markdown p
-	margin-top: 0
-	margin-bottom: 16px
-
-.markdown a
-	text-decoration: none
-	color: #58a6ff
-
-.markdown .topics
-	margin-bottom: 10px
-
-.markdown .tag
-	display: inline-block
-	font-size: 12px
-	font-weight: 500
-	line-height: 18px
-	border: 1px solid transparent
-	border-radius: 2em
-	padding: 0 10px
-
-.markdown .tag.lang
-	color: #71ff58
-	background-color: rgba(86, 253, 56, 0.2)
-
-.markdown .tag.plat
-	color: #58a6ff
-	background-color: #388bfd33
-
-$solarized-primary: #839496
-$solarized-blue: #268BD2
-.solarized-em
-	color: #EEE8D5
-.solarized-gold
-	color: #B58900
-.solarized-orange
-	color: #CB4B16
-.solarized-red
-	color: #DC322F
-.solarized-pink
-	color: #D33682
-.solarized-purple
-	color: #6C71C4
-.solarized-blue
-	color: $solarized-blue
-.solarized-teal
-	color: #2AA198
-.solarized-green
-	color: #859900
-
-.green
-	color: green
-.white
-	color: white

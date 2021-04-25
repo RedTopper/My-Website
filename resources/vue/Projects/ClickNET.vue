@@ -98,18 +98,3 @@ import {Component, Vue} from 'vue-property-decorator'
 @Component({components: {IconGithubCorner}})
 export default class ClickNET extends Vue {}
 </script>
-
-<style lang="sass" scoped>
-.video
-	position: relative
-	padding-top: 56.25%
-
-.video iframe
-	position: absolute
-	top: 0
-	left: 0
-	width: 100%
-	height: 100%
-	border: none
-
-</style>

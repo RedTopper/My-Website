@@ -22,6 +22,7 @@ mix.webpackConfig({
 	.copy('resources/img/super-haxagon/*', 'public/img/super-haxagon')
 	.copy('resources/img/my-website/*', 'public/img/my-website')
 	.copy('resources/img/click-net/*', 'public/img/click-net')
+	.copy('resources/img/hidden-perspective/*', 'public/img/hidden-perspective')
 
 	.vue()
 	.extract();

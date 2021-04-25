@@ -3,6 +3,7 @@ import {App} from "@ts/App/App";
 import SuperHaxagon from "@vue/Projects/SuperHaxagon.vue";
 import MyWebsite from "@vue/Projects/MyWebsite.vue";
 import ClickNET from "@vue/Projects/ClickNET.vue";
+import HiddenPerspective from "@vue/Projects/HiddenPerspective.vue";
 import Reboot from "@vue/Apps/Reboot.vue";
 import Welcome from "@vue/Apps/Welcome.vue";
 import Folder from "@vue/Apps/Folder.vue";
@@ -41,6 +42,17 @@ export class AppFactory {
 				"click-net.md",
 				"Multiplayer clicker game",
 				"/img/click-net/thumb.png",
+				1024,
+				768,
+				true,
+				"#0d1117"
+			),
+			new App(
+				HiddenPerspective,
+				"Project: Hidden Perspective",
+				"hidden-perspective.md",
+				"A co-op VR game",
+				"/img/hidden-perspective/thumb.png",
 				1024,
 				768,
 				true,

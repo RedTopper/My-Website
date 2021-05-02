@@ -6,6 +6,9 @@ import MyWebsite from "@vue/Projects/MyWebsite.vue";
 import ClickNET from "@vue/Projects/ClickNET.vue";
 import HiddenPerspective from "@vue/Projects/HiddenPerspective.vue";
 import ArchangelStats from "@vue/Projects/ArchangelStats.vue";
+import RubricPro from "@vue/Projects/RubricPro.vue";
+import MidiFactorio from "@vue/Projects/MidiFactorio.vue";
+import Steamworks2017 from "@vue/Projects/Steamworks2017.vue";
 import Construction from "@vue/Apps/Construction.vue";
 
 import Reboot from "@vue/Apps/Reboot.vue";
@@ -94,6 +97,51 @@ export class AppFactory {
 				["JQuery"],
 				["Web"]
 			),
+			new AppProject(
+				RubricPro,
+				"Project: Rubric Pro",
+				"Rubric Pro",
+				"2016-2017",
+				"rubric-pro.md",
+				"Student Rubric Tracker",
+				"https://github.com/RedTopper/Rubric-Pro",
+				"/img/rubric-pro/thumb.png",
+				"/img/rubric-pro/icon.png",
+				"/img/rubric-pro/banner.png",
+				["PHP", "JavaScript"],
+				[],
+				["Web"]
+			),
+			new AppProject(
+				MidiFactorio,
+				"Project: Midi Factorio",
+				"Midi Factorio",
+				"2017",
+				"midi-factorio.md",
+				"Convert MIDI to Blueprint",
+				"https://github.com/RedTopper/Midi-Factorio",
+				"/img/midi-factorio/thumb.png",
+				"/img/midi-factorio/icon.png",
+				"/img/midi-factorio/banner.png",
+				["Java"],
+				[],
+				["Factorio"]
+			),
+			new AppProject(
+				Steamworks2017,
+				"Project: Steamworks 2017",
+				"Steamworks 2017",
+				"2016-2017",
+				"steamworks.md",
+				"FRC Robotics 2017",
+				"https://github.com/RedTopper/Steamworks-2017",
+				"/img/steamworks-2017/thumb.png",
+				"/img/steamworks-2017/icon.png",
+				"/img/steamworks-2017/banner.png",
+				["Java"],
+				["OpenCV"],
+				["FRC"]
+			),
 			new App(
 				Construction,
 				"More to come!",
@@ -137,7 +185,7 @@ export class AppFactory {
 				"Projects",
 				"Personal Projects Folder",
 				IconProjects,
-				822,
+				860,
 				600,
 				true,
 				"#202020",

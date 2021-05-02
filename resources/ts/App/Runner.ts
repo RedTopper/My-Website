@@ -4,11 +4,8 @@ import {IScreen} from "@ts/App/IScreen";
 export class Runner {
 	private states: State[] = [];
 	private running: boolean = false;
-	private readonly screen: IScreen;
 
-	constructor(screen: IScreen) {
-		this.screen = screen;
-	}
+	constructor(private screen: IScreen) {}
 
 	public add(states: State[]) {
 		this.states = this.states.concat(states);

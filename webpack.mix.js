@@ -22,6 +22,9 @@ mix.webpackConfig({
 	.copy('resources/img/click-net/*', 'public/img/click-net')
 	.copy('resources/img/hidden-perspective/*', 'public/img/hidden-perspective')
 	.copy('resources/img/archangel-stats/*', 'public/img/archangel-stats')
+	.copy('resources/img/rubric-pro/*', 'public/img/rubric-pro')
+	.copy('resources/img/midi-factorio/*', 'public/img/midi-factorio')
+	.copy('resources/img/steamworks-2017/*', 'public/img/steamworks-2017')
 
 	.vue()
 	.extract();

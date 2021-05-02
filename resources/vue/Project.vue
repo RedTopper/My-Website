@@ -4,9 +4,9 @@
 			<IconGithubCorner/>
 		</a>
 		<div class="markdown">
-			<img v-if=project.banner class="banner" :src=project.banner alt="Banner" style="margin: 60px auto">
-			<h1><img v-if=project.icon class="icon" :src=project.icon alt="Icon">
-				{{project.name}} <small v-if="project.year">({{ project.year }})</small>
+			<img v-if=project.banner class="banner" :src=project.banner alt="Banner" :style="{margin: margin}">
+			<h1><img v-if=project.icon class="icon" :src=project.icon alt="Icon">{{project.name}}
+				<small v-if="project.year">({{ project.year }})</small>
 			</h1>
 			<div class="topics">
 				<span class="tag lang" v-for="(lang, index) in project.languages" :key="'lang' + index">
@@ -30,5 +30,13 @@ import {AppProject} from "@ts/App/AppProject";
 @Component({components: {IconGithubCorner}})
 export default class Project extends Vue {
 	@Prop() project!: AppProject;
+
+	get margin() {
+		if (this.project.name == "Super Haxagon") {
+			return "0 auto";
+		}
+
+		return "60px auto";
+	}
 }
 </script>

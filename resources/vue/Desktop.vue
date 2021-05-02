@@ -12,7 +12,7 @@
 		<div class="icons">
 			<div v-for="(app, index) in apps" :key="index" @click="cmdLaunch(app, true)" :title="app.hover" tabindex=0 role="button">
 				<div class="app">
-					<component class="icon" v-bind:is="app.icon"></component>
+					<component class="icon" v-bind:is="app.thumb"></component>
 					<div class="label">{{ app.label }}</div>
 				</div>
 			</div>

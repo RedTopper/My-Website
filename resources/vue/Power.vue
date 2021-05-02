@@ -5,7 +5,7 @@
 				<IconPower></IconPower>
 			</div>
 			<div class="help">Tap to boot</div>
-			<div class="help-small">or press any key</div>
+			<!--<div class="help-small">or press any key</div>-->
 		</div>
 
 		<div class="skip">

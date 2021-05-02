@@ -28,17 +28,6 @@ export default class Screen extends Vue implements IScreen {
 		this.runner = new Runner(this);
 	}
 
-	created() {
-		let self = this;
-		window.addEventListener('keydown', (e) => {
-			self.keypress = e.key;
-			if (self.component == Power) {
-				self.cmdPower();
-				self.keypress = null;
-			}
-		});
-	}
-
 	cmdPower() {
 		console.log("Let's go!");
 		console.log("Try out the BIOS hotkeys while you're at it!");

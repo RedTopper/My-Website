@@ -135,10 +135,13 @@ $window-background: rgba(0, 43, 54, 0.97)
 	box-sizing: border-box
 
 .controls
-	float: right
+	position: absolute
+	top: 0
+	right: 0
 	height: $window-control-height
 	display: flex
 	flex-direction: row
+	background-color: $window-accents
 
 .controls .close, .controls .max, .controls .min
 	width: $window-control-height

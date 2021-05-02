@@ -1,7 +1,7 @@
 <template>
 	<div class="content">
 		<div class="app" :title="app.hover" v-for="(app, index) in apps" :key="index" v-on:click="cmdLaunch(app)">
-			<img class="icon" :src="app.icon" :alt="app.label"/>
+			<img class="icon" :src="app.thumb" :alt="app.label"/>
 			<div class="label">{{ app.label }}</div>
 			<div class="hover">{{ app.hover }}</div>
 		</div>
